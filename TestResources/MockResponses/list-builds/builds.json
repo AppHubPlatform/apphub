@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "data": [{
+    "s3_url": "https://aws.amazon.com/abc",
+    "uid": "ABC",
+    "compiler_version": "1.0.0",
+    "project_uid": "123",
+    "app_versions": {"1.0": "1.0", "1.1": "1.1"},
+    "description": "This is an extremely long description of a build. It doesn't do much, though.",
+    "created": "1437296366193",
+    "name": "My Build"
+  }, {
+    "s3_url": "https://aws.amazon.com/def",
+    "uid": "DEF",
+    "compiler_version": "1.0.0",
+    "project_uid": "123",
+    "app_versions": {"1.0": "1.0"},
+    "description": "Working",
+    "created": "1437296366093",
+    "name": "My Build"
+  }]
+}

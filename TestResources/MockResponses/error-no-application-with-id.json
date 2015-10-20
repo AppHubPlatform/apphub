@@ -1,0 +1,7 @@
+{
+    "status": "error",
+    "data": {
+        "message": "No application with that id",
+        "code": 440
+    }
+}

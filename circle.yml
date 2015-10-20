@@ -1,0 +1,22 @@
+machine:
+  xcode:
+    version: "7.0"
+
+dependencies:
+  pre:
+    - brew install npm
+    - brew uninstall xctool && brew install xctool
+    - cd AppHubIntegration && npm install
+
+test:
+  override:
+    - xctool
+      -reporter pretty
+      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
+      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+      CODE_SIGNING_REQUIRED=NO
+      -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
+      -sdk iphonesimulator
+      -project AppHubIntegration/AppHubIntegration.xcodeproj
+      -scheme "AppHubIntegration"
+      build build-tests run-tests

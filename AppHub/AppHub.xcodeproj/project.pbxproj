@@ -1,0 +1,796 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		551EE90E1B804C9F0039233F /* Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 551EE90F1B804C9F0039233F /* Build configuration list for PBXAggregateTarget "Framework" */;
+			buildPhases = (
+				55EED29D1B804CC000AA58CE /* Build Framework */,
+			);
+			dependencies = (
+				551EE9131B804CA80039233F /* PBXTargetDependency */,
+			);
+			name = Framework;
+			productName = Framework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		403CB84A1B6368D500521BDF /* Cow.png in Resources */ = {isa = PBXBuildFile; fileRef = 403CB8491B6368D500521BDF /* Cow.png */; };
+		403CB84C1B6369DE00521BDF /* Pig.png in Resources */ = {isa = PBXBuildFile; fileRef = 403CB84B1B6369DE00521BDF /* Pig.png */; };
+		403CB84E1B6372D100521BDF /* AHBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB84D1B6372D100521BDF /* AHBuild.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		403CB8501B63733300521BDF /* AHBuild.m in Sources */ = {isa = PBXBuildFile; fileRef = 403CB84F1B63733300521BDF /* AHBuild.m */; };
+		403CB8611B637AA800521BDF /* AHPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 403CB8601B637AA800521BDF /* AHPaths.m */; };
+		403CB86B1B6381E000521BDF /* AHFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 403CB86A1B6381E000521BDF /* AHFileSystem.m */; };
+		40765E991B6345EB000594CC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40765E981B6345EB000594CC /* libz.dylib */; };
+		40765E9B1B634604000594CC /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40765E9A1B634604000594CC /* libOCMock.a */; };
+		40825FE31B6343E500A8A506 /* AHBuildManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 40825FD01B6343E500A8A506 /* AHBuildManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40825FE41B6343E500A8A506 /* AHBuildManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD11B6343E500A8A506 /* AHBuildManager.m */; };
+		40825FE71B6343E500A8A506 /* AHBuildsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD41B6343E500A8A506 /* AHBuildsListViewController.m */; };
+		40825FE91B6343E500A8A506 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD71B6343E500A8A506 /* ioapi.c */; };
+		40825FEB1B6343E500A8A506 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD91B6343E500A8A506 /* mztools.c */; };
+		40825FED1B6343E500A8A506 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 40825FDB1B6343E500A8A506 /* unzip.c */; };
+		40825FEF1B6343E500A8A506 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 40825FDD1B6343E500A8A506 /* zip.c */; };
+		40825FF21B6343E500A8A506 /* AH_SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FE01B6343E500A8A506 /* AH_SSZipArchive.m */; settings = {COMPILER_FLAGS = "-DNS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER=0"; }; };
+		40825FF41B6343E500A8A506 /* UIImage+AppHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FE21B6343E500A8A506 /* UIImage+AppHub.m */; };
+		408260101B63443200A8A506 /* AppHubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4082600F1B63443200A8A506 /* AppHubTests.m */; };
+		40936D1A1B9147A300F59A18 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40936D191B9147A300F59A18 /* SystemConfiguration.framework */; };
+		40936D1D1B9148D400F59A18 /* AHReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 40936D1B1B9148D400F59A18 /* AHReachability.h */; };
+		40936D1E1B9148D400F59A18 /* AHReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 40936D1C1B9148D400F59A18 /* AHReachability.m */; };
+		40A4A1331B781BFF0025B83A /* AHBuildTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4A1321B781BFF0025B83A /* AHBuildTests.m */; };
+		40A4A1391B7885580025B83A /* AppHubTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4A1381B7885580025B83A /* AppHubTestCase.m */; };
+		5504F9811B7DAB4E00D85C4D /* AHLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 5504F9801B7DAB4E00D85C4D /* AHLogging.m */; };
+		5504F9991B7DC39B00D85C4D /* Shims.m in Sources */ = {isa = PBXBuildFile; fileRef = 5504F9981B7DC39B00D85C4D /* Shims.m */; };
+		5504F9B51B7DC64200D85C4D /* AppHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 5504F9A51B7DC44000D85C4D /* AppHub.m */; };
+		552C6FE41B807ACB003846F8 /* AppHubReactModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 552C6FE31B807ACB003846F8 /* AppHubReactModule.m */; };
+		55357A031B800FD40033A332 /* libAppHubTestUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 553579FC1B800FBF0033A332 /* libAppHubTestUtils.a */; };
+		55357A041B800FE40033A332 /* AppHubTestBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 553579FE1B800FBF0033A332 /* AppHubTestBundle.bundle */; };
+		55357A051B80128B0033A332 /* AppHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB8621B637F2B00521BDF /* AppHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55357A061B8012920033A332 /* AHPaths.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB85E1B637A9900521BDF /* AHPaths.h */; };
+		55357A071B8012960033A332 /* AHLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 5504F97E1B7DAB3C00D85C4D /* AHLogging.h */; };
+		55357A081B8012980033A332 /* AHFileSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB8681B6381BF00521BDF /* AHFileSystem.h */; };
+		55357A091B80129C0033A332 /* AHDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 834003F51B7FA2EE00EC37F3 /* AHDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55357A0A1B80129F0033A332 /* AHConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 834003F81B7FA74300EC37F3 /* AHConstants.h */; };
+		55357A0B1B8012A20033A332 /* AHBuildsListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 40825FD31B6343E500A8A506 /* AHBuildsListViewController.h */; };
+		55357A0C1B8012A50033A332 /* AHBuildManager+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 40825FD21B6343E500A8A506 /* AHBuildManager+Private.h */; };
+		55357A0D1B8012AA0033A332 /* AHBuild+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB8511B63747200521BDF /* AHBuild+Private.h */; };
+		55357A0F1B802B670033A332 /* MockBundles in Resources */ = {isa = PBXBuildFile; fileRef = 55357A0E1B802B670033A332 /* MockBundles */; };
+		555FF3BB1B37AC8D0064F175 /* libAppHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 555FF3AF1B37AC8D0064F175 /* libAppHub.a */; };
+		5588227C1B806AEF00FCC175 /* AppHub+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5588227B1B806AEF00FCC175 /* AppHub+Private.h */; };
+		834003F71B7FA65500EC37F3 /* AHConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 834003F61B7FA65500EC37F3 /* AHConstants.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		551EE9121B804CA80039233F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 555FF3A71B37AC8D0064F175 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 555FF3AE1B37AC8D0064F175;
+			remoteInfo = AppHub;
+		};
+		553579FB1B800FBF0033A332 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 557605911B7FC258007112F2;
+			remoteInfo = AppHubTestUtils;
+		};
+		553579FD1B800FBF0033A332 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 557605C31B7FD774007112F2;
+			remoteInfo = AppHubTestBundle;
+		};
+		553579FF1B800FCD0033A332 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 557605901B7FC258007112F2;
+			remoteInfo = AppHubTestUtils;
+		};
+		55357A011B800FD00033A332 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 557605C21B7FD774007112F2;
+			remoteInfo = AppHubTestBundle;
+		};
+		555FF3BC1B37AC8D0064F175 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 555FF3A71B37AC8D0064F175 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 555FF3AE1B37AC8D0064F175;
+			remoteInfo = AppHub;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		555FF3AD1B37AC8D0064F175 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		403CB8491B6368D500521BDF /* Cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cow.png; path = "Supporting Files/Cow.png"; sourceTree = "<group>"; };
+		403CB84B1B6369DE00521BDF /* Pig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pig.png; path = "Supporting Files/Pig.png"; sourceTree = "<group>"; };
+		403CB84D1B6372D100521BDF /* AHBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHBuild.h; sourceTree = "<group>"; };
+		403CB84F1B63733300521BDF /* AHBuild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHBuild.m; sourceTree = "<group>"; };
+		403CB8511B63747200521BDF /* AHBuild+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AHBuild+Private.h"; sourceTree = "<group>"; };
+		403CB85E1B637A9900521BDF /* AHPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPaths.h; sourceTree = "<group>"; };
+		403CB8601B637AA800521BDF /* AHPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHPaths.m; sourceTree = "<group>"; };
+		403CB8621B637F2B00521BDF /* AppHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHub.h; sourceTree = "<group>"; };
+		403CB8681B6381BF00521BDF /* AHFileSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AHFileSystem.h; sourceTree = "<group>"; };
+		403CB86A1B6381E000521BDF /* AHFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHFileSystem.m; sourceTree = "<group>"; };
+		40765E981B6345EB000594CC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		40765E9A1B634604000594CC /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		40825FD01B6343E500A8A506 /* AHBuildManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHBuildManager.h; sourceTree = "<group>"; };
+		40825FD11B6343E500A8A506 /* AHBuildManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHBuildManager.m; sourceTree = "<group>"; };
+		40825FD21B6343E500A8A506 /* AHBuildManager+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AHBuildManager+Private.h"; sourceTree = "<group>"; };
+		40825FD31B6343E500A8A506 /* AHBuildsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHBuildsListViewController.h; sourceTree = "<group>"; };
+		40825FD41B6343E500A8A506 /* AHBuildsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHBuildsListViewController.m; sourceTree = "<group>"; };
+		40825FD61B6343E500A8A506 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		40825FD71B6343E500A8A506 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		40825FD81B6343E500A8A506 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		40825FD91B6343E500A8A506 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		40825FDA1B6343E500A8A506 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		40825FDB1B6343E500A8A506 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		40825FDC1B6343E500A8A506 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		40825FDD1B6343E500A8A506 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = zip.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
+		40825FDE1B6343E500A8A506 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		40825FDF1B6343E500A8A506 /* AH_SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AH_SSZipArchive.h; path = ../AH_SSZipArchive.h; sourceTree = "<group>"; };
+		40825FE01B6343E500A8A506 /* AH_SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AH_SSZipArchive.m; path = ../AH_SSZipArchive.m; sourceTree = "<group>"; };
+		40825FE21B6343E500A8A506 /* UIImage+AppHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AppHub.m"; sourceTree = "<group>"; };
+		4082600F1B63443200A8A506 /* AppHubTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHubTests.m; sourceTree = "<group>"; };
+		40936D191B9147A300F59A18 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		40936D1B1B9148D400F59A18 /* AHReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHReachability.h; sourceTree = "<group>"; };
+		40936D1C1B9148D400F59A18 /* AHReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHReachability.m; sourceTree = "<group>"; };
+		40A4A1321B781BFF0025B83A /* AHBuildTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHBuildTests.m; sourceTree = "<group>"; };
+		40A4A1371B7885160025B83A /* AppHubTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHubTestCase.h; sourceTree = "<group>"; };
+		40A4A1381B7885580025B83A /* AppHubTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHubTestCase.m; sourceTree = "<group>"; };
+		5504F97E1B7DAB3C00D85C4D /* AHLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHLogging.h; sourceTree = "<group>"; };
+		5504F9801B7DAB4E00D85C4D /* AHLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHLogging.m; sourceTree = "<group>"; };
+		5504F9981B7DC39B00D85C4D /* Shims.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shims.m; sourceTree = "<group>"; };
+		5504F9A51B7DC44000D85C4D /* AppHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHub.m; sourceTree = "<group>"; };
+		552C6FE31B807ACB003846F8 /* AppHubReactModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHubReactModule.m; sourceTree = "<group>"; };
+		553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppHubTestUtils.xcodeproj; path = ../../AppHubTestUtils/AppHubTestUtils.xcodeproj; sourceTree = "<group>"; };
+		55357A0E1B802B670033A332 /* MockBundles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MockBundles; sourceTree = "<group>"; };
+		555FF3AF1B37AC8D0064F175 /* libAppHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppHub.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		555FF3BA1B37AC8D0064F175 /* AppHub.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppHub.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5588227B1B806AEF00FCC175 /* AppHub+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppHub+Private.h"; sourceTree = "<group>"; };
+		834003F51B7FA2EE00EC37F3 /* AHDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AHDefines.h; sourceTree = "<group>"; };
+		834003F61B7FA65500EC37F3 /* AHConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHConstants.m; sourceTree = "<group>"; };
+		834003F81B7FA74300EC37F3 /* AHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHConstants.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		555FF3AC1B37AC8D0064F175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		555FF3B71B37AC8D0064F175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40936D1A1B9147A300F59A18 /* SystemConfiguration.framework in Frameworks */,
+				55357A031B800FD40033A332 /* libAppHubTestUtils.a in Frameworks */,
+				40765E9B1B634604000594CC /* libOCMock.a in Frameworks */,
+				40765E991B6345EB000594CC /* libz.dylib in Frameworks */,
+				555FF3BB1B37AC8D0064F175 /* libAppHub.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		40825FD51B6343E500A8A506 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				40825FDF1B6343E500A8A506 /* AH_SSZipArchive.h */,
+				40825FE01B6343E500A8A506 /* AH_SSZipArchive.m */,
+				40825FD61B6343E500A8A506 /* crypt.h */,
+				40825FD71B6343E500A8A506 /* ioapi.c */,
+				40825FD81B6343E500A8A506 /* ioapi.h */,
+				40825FD91B6343E500A8A506 /* mztools.c */,
+				40825FDA1B6343E500A8A506 /* mztools.h */,
+				40825FDB1B6343E500A8A506 /* unzip.c */,
+				40825FDC1B6343E500A8A506 /* unzip.h */,
+				40825FDD1B6343E500A8A506 /* zip.c */,
+				40825FDE1B6343E500A8A506 /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		553579F71B800FBF0033A332 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				553579FC1B800FBF0033A332 /* libAppHubTestUtils.a */,
+				553579FE1B800FBF0033A332 /* AppHubTestBundle.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		555FF3A61B37AC8D0064F175 = {
+			isa = PBXGroup;
+			children = (
+				555FF3B11B37AC8D0064F175 /* AppHub */,
+				555FF3BE1B37AC8D0064F175 /* AppHubTests */,
+				555FF3B01B37AC8D0064F175 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		555FF3B01B37AC8D0064F175 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				555FF3AF1B37AC8D0064F175 /* libAppHub.a */,
+				555FF3BA1B37AC8D0064F175 /* AppHub.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		555FF3B11B37AC8D0064F175 /* AppHub */ = {
+			isa = PBXGroup;
+			children = (
+				403CB84D1B6372D100521BDF /* AHBuild.h */,
+				403CB84F1B63733300521BDF /* AHBuild.m */,
+				403CB8511B63747200521BDF /* AHBuild+Private.h */,
+				40825FD21B6343E500A8A506 /* AHBuildManager+Private.h */,
+				40825FD01B6343E500A8A506 /* AHBuildManager.h */,
+				40825FD11B6343E500A8A506 /* AHBuildManager.m */,
+				40825FD31B6343E500A8A506 /* AHBuildsListViewController.h */,
+				40825FD41B6343E500A8A506 /* AHBuildsListViewController.m */,
+				834003F81B7FA74300EC37F3 /* AHConstants.h */,
+				834003F61B7FA65500EC37F3 /* AHConstants.m */,
+				834003F51B7FA2EE00EC37F3 /* AHDefines.h */,
+				403CB8681B6381BF00521BDF /* AHFileSystem.h */,
+				403CB86A1B6381E000521BDF /* AHFileSystem.m */,
+				5504F97E1B7DAB3C00D85C4D /* AHLogging.h */,
+				5504F9801B7DAB4E00D85C4D /* AHLogging.m */,
+				403CB85E1B637A9900521BDF /* AHPaths.h */,
+				403CB8601B637AA800521BDF /* AHPaths.m */,
+				5588227B1B806AEF00FCC175 /* AppHub+Private.h */,
+				403CB8621B637F2B00521BDF /* AppHub.h */,
+				5504F9A51B7DC44000D85C4D /* AppHub.m */,
+				552C6FE31B807ACB003846F8 /* AppHubReactModule.m */,
+				40936D1B1B9148D400F59A18 /* AHReachability.h */,
+				40936D1C1B9148D400F59A18 /* AHReachability.m */,
+				40825FD51B6343E500A8A506 /* minizip */,
+				40825FE21B6343E500A8A506 /* UIImage+AppHub.m */,
+			);
+			path = AppHub;
+			sourceTree = "<group>";
+		};
+		555FF3BE1B37AC8D0064F175 /* AppHubTests */ = {
+			isa = PBXGroup;
+			children = (
+				553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */,
+				5504F9981B7DC39B00D85C4D /* Shims.m */,
+				55357A0E1B802B670033A332 /* MockBundles */,
+				40A4A1371B7885160025B83A /* AppHubTestCase.h */,
+				40A4A1381B7885580025B83A /* AppHubTestCase.m */,
+				4082600F1B63443200A8A506 /* AppHubTests.m */,
+				40A4A1321B781BFF0025B83A /* AHBuildTests.m */,
+				555FF3BF1B37AC8D0064F175 /* Supporting Files */,
+			);
+			path = AppHubTests;
+			sourceTree = "<group>";
+		};
+		555FF3BF1B37AC8D0064F175 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40936D191B9147A300F59A18 /* SystemConfiguration.framework */,
+				403CB84B1B6369DE00521BDF /* Pig.png */,
+				403CB8491B6368D500521BDF /* Cow.png */,
+				40765E9A1B634604000594CC /* libOCMock.a */,
+				40765E981B6345EB000594CC /* libz.dylib */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		555FF3C91B37AD7C0064F175 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55357A0C1B8012A50033A332 /* AHBuildManager+Private.h in Headers */,
+				55357A081B8012980033A332 /* AHFileSystem.h in Headers */,
+				55357A0A1B80129F0033A332 /* AHConstants.h in Headers */,
+				55357A091B80129C0033A332 /* AHDefines.h in Headers */,
+				55357A0D1B8012AA0033A332 /* AHBuild+Private.h in Headers */,
+				55357A071B8012960033A332 /* AHLogging.h in Headers */,
+				55357A061B8012920033A332 /* AHPaths.h in Headers */,
+				55357A0B1B8012A20033A332 /* AHBuildsListViewController.h in Headers */,
+				5588227C1B806AEF00FCC175 /* AppHub+Private.h in Headers */,
+				40825FE31B6343E500A8A506 /* AHBuildManager.h in Headers */,
+				40936D1D1B9148D400F59A18 /* AHReachability.h in Headers */,
+				403CB84E1B6372D100521BDF /* AHBuild.h in Headers */,
+				55357A051B80128B0033A332 /* AppHub.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		555FF3AE1B37AC8D0064F175 /* AppHub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 555FF3C31B37AC8D0064F175 /* Build configuration list for PBXNativeTarget "AppHub" */;
+			buildPhases = (
+				555FF3AB1B37AC8D0064F175 /* Sources */,
+				555FF3AC1B37AC8D0064F175 /* Frameworks */,
+				555FF3AD1B37AC8D0064F175 /* CopyFiles */,
+				555FF3C91B37AD7C0064F175 /* Headers */,
+				551EE90D1B804C780039233F /* Prepare Framework */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppHub;
+			productName = AppHub;
+			productReference = 555FF3AF1B37AC8D0064F175 /* libAppHub.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		555FF3B91B37AC8D0064F175 /* AppHubTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 555FF3C61B37AC8D0064F175 /* Build configuration list for PBXNativeTarget "AppHubTests" */;
+			buildPhases = (
+				555FF3B61B37AC8D0064F175 /* Sources */,
+				555FF3B71B37AC8D0064F175 /* Frameworks */,
+				555FF3B81B37AC8D0064F175 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55357A021B800FD00033A332 /* PBXTargetDependency */,
+				55357A001B800FCD0033A332 /* PBXTargetDependency */,
+				555FF3BD1B37AC8D0064F175 /* PBXTargetDependency */,
+			);
+			name = AppHubTests;
+			productName = AppHubTests;
+			productReference = 555FF3BA1B37AC8D0064F175 /* AppHub.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		555FF3A71B37AC8D0064F175 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = AppHub;
+				TargetAttributes = {
+					551EE90E1B804C9F0039233F = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					555FF3AE1B37AC8D0064F175 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					555FF3B91B37AC8D0064F175 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
+			};
+			buildConfigurationList = 555FF3AA1B37AC8D0064F175 /* Build configuration list for PBXProject "AppHub" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 555FF3A61B37AC8D0064F175;
+			productRefGroup = 555FF3B01B37AC8D0064F175 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 553579F71B800FBF0033A332 /* Products */;
+					ProjectRef = 553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				555FF3AE1B37AC8D0064F175 /* AppHub */,
+				555FF3B91B37AC8D0064F175 /* AppHubTests */,
+				551EE90E1B804C9F0039233F /* Framework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		553579FC1B800FBF0033A332 /* libAppHubTestUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppHubTestUtils.a;
+			remoteRef = 553579FB1B800FBF0033A332 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		553579FE1B800FBF0033A332 /* AppHubTestBundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AppHubTestBundle.bundle;
+			remoteRef = 553579FD1B800FBF0033A332 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		555FF3B81B37AC8D0064F175 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55357A041B800FE40033A332 /* AppHubTestBundle.bundle in Resources */,
+				403CB84C1B6369DE00521BDF /* Pig.png in Resources */,
+				55357A0F1B802B670033A332 /* MockBundles in Resources */,
+				403CB84A1B6368D500521BDF /* Cow.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		551EE90D1B804C780039233F /* Prepare Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"";
+		};
+		55EED29D1B804CC000AA58CE /* Build Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\nSF_TARGET_NAME=${PROJECT_NAME}\nSF_EXECUTABLE_PATH=\"lib${SF_TARGET_NAME}.a\"\nSF_WRAPPER_NAME=\"${SF_TARGET_NAME}.framework\"\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcrun xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Smash the two static libraries into one fat binary and store it in the .framework\nxcrun lipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\n# Copy the binary to the other architecture folder to have a complete framework in both.\ncp -a \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		555FF3AB1B37AC8D0064F175 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40825FF41B6343E500A8A506 /* UIImage+AppHub.m in Sources */,
+				40825FEB1B6343E500A8A506 /* mztools.c in Sources */,
+				40825FE71B6343E500A8A506 /* AHBuildsListViewController.m in Sources */,
+				552C6FE41B807ACB003846F8 /* AppHubReactModule.m in Sources */,
+				40825FED1B6343E500A8A506 /* unzip.c in Sources */,
+				40936D1E1B9148D400F59A18 /* AHReachability.m in Sources */,
+				403CB86B1B6381E000521BDF /* AHFileSystem.m in Sources */,
+				40825FE41B6343E500A8A506 /* AHBuildManager.m in Sources */,
+				40825FE91B6343E500A8A506 /* ioapi.c in Sources */,
+				5504F9811B7DAB4E00D85C4D /* AHLogging.m in Sources */,
+				403CB8611B637AA800521BDF /* AHPaths.m in Sources */,
+				40825FF21B6343E500A8A506 /* AH_SSZipArchive.m in Sources */,
+				403CB8501B63733300521BDF /* AHBuild.m in Sources */,
+				834003F71B7FA65500EC37F3 /* AHConstants.m in Sources */,
+				5504F9B51B7DC64200D85C4D /* AppHub.m in Sources */,
+				40825FEF1B6343E500A8A506 /* zip.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		555FF3B61B37AC8D0064F175 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A4A1331B781BFF0025B83A /* AHBuildTests.m in Sources */,
+				40A4A1391B7885580025B83A /* AppHubTestCase.m in Sources */,
+				5504F9991B7DC39B00D85C4D /* Shims.m in Sources */,
+				408260101B63443200A8A506 /* AppHubTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		551EE9131B804CA80039233F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 555FF3AE1B37AC8D0064F175 /* AppHub */;
+			targetProxy = 551EE9121B804CA80039233F /* PBXContainerItemProxy */;
+		};
+		55357A001B800FCD0033A332 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppHubTestUtils;
+			targetProxy = 553579FF1B800FCD0033A332 /* PBXContainerItemProxy */;
+		};
+		55357A021B800FD00033A332 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppHubTestBundle;
+			targetProxy = 55357A011B800FD00033A332 /* PBXContainerItemProxy */;
+		};
+		555FF3BD1B37AC8D0064F175 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 555FF3AE1B37AC8D0064F175 /* AppHub */;
+			targetProxy = 555FF3BC1B37AC8D0064F175 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		551EE9101B804C9F0039233F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		551EE9111B804C9F0039233F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		555FF3C11B37AC8D0064F175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-fembed-bitcode";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		555FF3C21B37AC8D0064F175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "-fembed-bitcode";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		555FF3C41B37AC8D0064F175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../react-native/0.12.0/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HotPushTests",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = AppHub;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Debug;
+		};
+		555FF3C51B37AC8D0064F175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../react-native/0.12.0/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HotPushTests",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = AppHub;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Release;
+		};
+		555FF3C71B37AC8D0064F175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NO_REACT,
+					"DEBUG=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/AppHubTests",
+					"$(PROJECT_DIR)/../Stubs",
+				);
+				INFOPLIST_FILE = AppHubTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AppHubTests",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
+				PRODUCT_NAME = AppHub;
+			};
+			name = Debug;
+		};
+		555FF3C81B37AC8D0064F175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = NO_REACT;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/AppHubTests",
+					"$(PROJECT_DIR)/../Stubs",
+				);
+				INFOPLIST_FILE = AppHubTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AppHubTests",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
+				PRODUCT_NAME = AppHub;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		551EE90F1B804C9F0039233F /* Build configuration list for PBXAggregateTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				551EE9101B804C9F0039233F /* Debug */,
+				551EE9111B804C9F0039233F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		555FF3AA1B37AC8D0064F175 /* Build configuration list for PBXProject "AppHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				555FF3C11B37AC8D0064F175 /* Debug */,
+				555FF3C21B37AC8D0064F175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		555FF3C31B37AC8D0064F175 /* Build configuration list for PBXNativeTarget "AppHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				555FF3C41B37AC8D0064F175 /* Debug */,
+				555FF3C51B37AC8D0064F175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		555FF3C61B37AC8D0064F175 /* Build configuration list for PBXNativeTarget "AppHubTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				555FF3C71B37AC8D0064F175 /* Debug */,
+				555FF3C81B37AC8D0064F175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 555FF3A71B37AC8D0064F175 /* Project object */;
+}

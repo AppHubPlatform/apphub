@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/mata/Library/Developer/Shared/Documentation/DocSets/apphub.apphub.AppHub.docset
+Time: 2015-08-01 05:08:23 +0000
