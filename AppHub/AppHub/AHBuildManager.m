@@ -245,7 +245,7 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
     }
 }
 
-- (void)fetchBuildWithCompletionHandler:(AHBuildResultBlock)completionHandler
+- (void)_fetchBuildWithCompletionHandler:(AHBuildResultBlock)completionHandler
 {
     if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
         if (completionHandler) {
@@ -308,18 +308,29 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
     }];
 }
 
+- (void)fetchBuildWithCompletionHandler:(AHBuildResultBlock)completionHandler {
+    if (self.fetchingBuild) {
+        return;
+    }
+    
+    self.fetchingBuild = YES;
+    
+    __weak typeof(self) weakSelf = self;
+    [self _fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
+        weakSelf.fetchingBuild = NO;
+        if (completionHandler) {
+            completionHandler(result, error);
+        }
+    }];
+}
+
 - (void)pollForBuilds
 {
     AHReachability *reachability = [[AppHub sharedManager] reachability];
     
     if (([reachability isReachableViaWiFi] || ([reachability isReachableViaWWAN] && _cellularDownloadsEnabled)) &&
-        [AppHub applicationID] && !self.fetchingBuild) {
-        self.fetchingBuild = YES;
-
-        __weak typeof(self) weakSelf = self;
-        [self fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
-            weakSelf.fetchingBuild = NO;
-        }];
+        [AppHub applicationID]) {
+        [self fetchBuildWithCompletionHandler:nil];
     }
 }
 

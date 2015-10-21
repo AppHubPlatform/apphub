@@ -426,6 +426,57 @@
     }];
 }
 
+-(void) testNotificationCalledOnPoll {
+    [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
+    [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.7/working-build-images.zip"];
+    
+    id observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:AHBuildManagerDidMakeBuildAvailableNotification object:nil];
+    
+    [[observerMock expect] notificationWithName:AHBuildManagerDidMakeBuildAvailableNotification
+                                         object:[AppHub buildManager]
+                                       userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
+        AHBuild *build = [userInfo objectForKey:AHBuildManagerBuildKey];
+        XCTAssertNotEqual(build.bundle, [NSBundle mainBundle]);
+        
+        return YES;
+    }]];
+    
+    [AppHub buildManager].automaticPollingEnabled = YES;
+    
+    NSDate *runUntil = [NSDate dateWithTimeIntervalSinceNow:3.0];
+    [[NSRunLoop currentRunLoop] runUntilDate:runUntil];
+    
+    [observerMock verify];
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+-(void) testNotificationCalledOnceWithPoll {
+    [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
+    [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.7/working-build-images.zip"];
+    
+    id observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:AHBuildManagerDidMakeBuildAvailableNotification object:nil];
+    
+    [[observerMock expect] notificationWithName:AHBuildManagerDidMakeBuildAvailableNotification
+                                         object:[AppHub buildManager]
+                                       userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
+        AHBuild *build = [userInfo objectForKey:AHBuildManagerBuildKey];
+        XCTAssertNotEqual(build.bundle, [NSBundle mainBundle]);
+        
+        return YES;
+    }]];
+    
+    [AppHub buildManager].automaticPollingEnabled = YES;
+    [[AppHub buildManager] fetchBuildWithCompletionHandler:nil];
+    
+    NSDate *runUntil = [NSDate dateWithTimeIntervalSinceNow:3.0];
+    [[NSRunLoop currentRunLoop] runUntilDate:runUntil];
+    
+    [observerMock verify];
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
 -(void) testNotificationCalledOnDefaultBuilds {
     [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
     [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.7/working-build-images.zip"];
