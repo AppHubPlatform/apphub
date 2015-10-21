@@ -194,7 +194,7 @@
 }
 
 -(void) testSdkVersion {
-    XCTAssertTrue([[AppHub SDKVersion] isEqualToString:@"0.0.8"]);
+    XCTAssertTrue([[AppHub SDKVersion] isEqualToString:@"0.1.0"]);
 }
 
 -(void) testApiUrl {
