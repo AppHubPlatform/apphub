@@ -477,30 +477,22 @@
     [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
 }
 
--(void) testNotificationCalledOnDefaultBuilds {
+-(void) testNotificationCalledForAllHandlers {
     [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
     [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.7/working-build-images.zip"];
     
-    id observerMock = [OCMockObject observerMock];
+    XCTestExpectation *firstExpection = [self expectationWithDescription:@"first expectation"];
+    XCTestExpectation *secondExpectation = [self expectationWithDescription:@"second expectation"];
     
-    [self fetchTwoBuildsWithInitialCompletionHandler:^(AHBuild *result, NSError *error) {
-        [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/no-build.json"];
-        
-        
-        [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:AHBuildManagerDidMakeBuildAvailableNotification object:nil];
-        
-        [[observerMock expect] notificationWithName:AHBuildManagerDidMakeBuildAvailableNotification
-                                             object:[AppHub buildManager]
-                                           userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
-            AHBuild *build = [userInfo objectForKey:AHBuildManagerBuildKey];
-            XCTAssertEqualObjects(build.bundle, [NSBundle mainBundle]);
-            return YES;
-        }]];
-        
-    } finalCompletionHandler:^(AHBuild *result, NSError *error) {
-        [observerMock verify];
-        [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+    [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
+        [firstExpection fulfill];
     }];
+    
+    [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
+        [secondExpectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:2 handler:nil];
 }
 
 -(void) testNotificationNotCalledNoNewBuilds {

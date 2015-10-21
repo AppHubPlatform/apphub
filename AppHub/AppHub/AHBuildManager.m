@@ -46,6 +46,7 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
         self.automaticPollingEnabled = YES;
         self.cellularDownloadsEnabled = NO;
         self.debugBuildsEnabled = NO;
+        self.completionHandlers = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -309,6 +310,10 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
 }
 
 - (void)fetchBuildWithCompletionHandler:(AHBuildResultBlock)completionHandler {
+    if (completionHandler) {
+        [self.completionHandlers addObject:completionHandler];
+    }
+    
     if (self.fetchingBuild) {
         return;
     }
@@ -318,9 +323,16 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
     __weak typeof(self) weakSelf = self;
     [self _fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
         weakSelf.fetchingBuild = NO;
-        if (completionHandler) {
-            completionHandler(result, error);
-        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *handlers = [NSMutableArray arrayWithArray:self.completionHandlers];
+            [self.completionHandlers removeAllObjects];
+            
+            // AHBuildManager properties are only accessible on the main thread.
+            for (AHBuildResultBlock completion in handlers) {
+                completion(result, error);
+            }
+        });
     }];
 }
 
