@@ -38,7 +38,7 @@
         completionHandler(result, error);
         [fetchedBuild fulfill];
     }];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
 }
 
 -(void) fetchTwoBuildsWithInitialCompletionHandler:(AHBuildResultBlock)initialCompletionHandler
@@ -53,7 +53,7 @@
             [fetchedBuild fulfill];
         }];
     }];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
 }
 
 -(void) testWorkingBuildShouldHaveJsContents {
@@ -529,7 +529,7 @@
     
     [AppHub buildManager].automaticPollingEnabled = YES;
     
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
     
     [mock stopMocking];
     [reachabilityMock stopMocking];
@@ -551,7 +551,7 @@
     
     [AppHub buildManager].automaticPollingEnabled = YES;
     
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
     
     [mock stopMocking];
     [reachabilityMock stopMocking];
