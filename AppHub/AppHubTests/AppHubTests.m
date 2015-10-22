@@ -33,12 +33,12 @@
 }
 
 -(void) fetchBuildWithCompletionHandler:(AHBuildResultBlock)completionHandler {
-    XCTestExpectation *fetchedBuild = [self expectationWithDescription:@"fetching a build"];
+    __weak XCTestExpectation *fetchedBuild = [self expectationWithDescription:@"fetching a build"];
     [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
         completionHandler(result, error);
         [fetchedBuild fulfill];
     }];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
 }
 
 -(void) fetchTwoBuildsWithInitialCompletionHandler:(AHBuildResultBlock)initialCompletionHandler
@@ -53,7 +53,7 @@
             [fetchedBuild fulfill];
         }];
     }];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
 }
 
 -(void) testWorkingBuildShouldHaveJsContents {
@@ -194,7 +194,7 @@
 }
 
 -(void) testSdkVersion {
-    XCTAssertTrue([[AppHub SDKVersion] isEqualToString:@"0.1.0"]);
+    XCTAssertTrue([[AppHub SDKVersion] isEqualToString:@"0.1.1"]);
 }
 
 -(void) testApiUrl {
@@ -477,30 +477,22 @@
     [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
 }
 
--(void) testNotificationCalledOnDefaultBuilds {
+-(void) testNotificationCalledForAllHandlers {
     [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
     [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.7/working-build-images.zip"];
     
-    id observerMock = [OCMockObject observerMock];
+    XCTestExpectation *firstExpection = [self expectationWithDescription:@"first expectation"];
+    XCTestExpectation *secondExpectation = [self expectationWithDescription:@"second expectation"];
     
-    [self fetchTwoBuildsWithInitialCompletionHandler:^(AHBuild *result, NSError *error) {
-        [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/no-build.json"];
-        
-        
-        [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:AHBuildManagerDidMakeBuildAvailableNotification object:nil];
-        
-        [[observerMock expect] notificationWithName:AHBuildManagerDidMakeBuildAvailableNotification
-                                             object:[AppHub buildManager]
-                                           userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
-            AHBuild *build = [userInfo objectForKey:AHBuildManagerBuildKey];
-            XCTAssertEqualObjects(build.bundle, [NSBundle mainBundle]);
-            return YES;
-        }]];
-        
-    } finalCompletionHandler:^(AHBuild *result, NSError *error) {
-        [observerMock verify];
-        [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+    [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
+        [firstExpection fulfill];
     }];
+    
+    [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
+        [secondExpectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:2 handler:nil];
 }
 
 -(void) testNotificationNotCalledNoNewBuilds {
@@ -537,7 +529,7 @@
     
     [AppHub buildManager].automaticPollingEnabled = YES;
     
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
     
     [mock stopMocking];
     [reachabilityMock stopMocking];
@@ -559,7 +551,7 @@
     
     [AppHub buildManager].automaticPollingEnabled = YES;
     
-    [self waitForExpectationsWithTimeout:1 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
     
     [mock stopMocking];
     [reachabilityMock stopMocking];

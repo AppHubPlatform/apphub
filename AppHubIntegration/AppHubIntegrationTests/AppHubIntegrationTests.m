@@ -53,17 +53,6 @@ static XCTestExpectation *_newBuildExpectation;
   return NO;
 }
 
--(void) fetchBuildSync {
-  dispatch_semaphore_t sem = dispatch_semaphore_create(0);
-  
-  [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
-    XCTAssertNil(error);
-    dispatch_semaphore_signal(sem);
-  }];
-  
-  dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
-}
-
 -(void) testExportingBuildInformation {
   UIViewController *vc = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
   NSDate *date = [NSDate dateWithTimeIntervalSinceNow:TIMEOUT_SECONDS];
@@ -105,63 +94,58 @@ static XCTestExpectation *_newBuildExpectation;
   [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
   [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.11/hello-world-2.zip"];
   
-  [self fetchBuildSync];
-  NSURL *jsCodeLocation = [[AppHub buildManager].currentBuild.bundle URLForResource:@"main"
-                                                                      withExtension:@"jsbundle"];
+  XCTestExpectation *testExpection = [self expectationWithDescription:@"Expect new JS code"];
   
-  RCTRootView *view = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                  moduleName:@"HelloWorld"
-                                           initialProperties:nil
+  [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
+      NSURL *jsCodeLocation = [[AppHub buildManager].currentBuild.bundle URLForResource:@"main"
+                                                                          withExtension:@"jsbundle"];
+      RCTRootView *view = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                      moduleName:@"HelloWorld"
+                                               initialProperties:nil
                                                    launchOptions:nil];
-  
-  NSDate *date = [NSDate dateWithTimeIntervalSinceNow:TIMEOUT_SECONDS];
-  BOOL foundElement = NO;
-  
-  while ([date timeIntervalSinceNow] > 0 && !foundElement) {
-    [[NSRunLoop mainRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-    [[NSRunLoop mainRunLoop] runMode:NSRunLoopCommonModes beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        BOOL foundElement = [self findSubviewInView:view matching:^BOOL(UIView *view) {
+          if ([view.accessibilityLabel containsString:@"hot code"] &&
+              [view.accessibilityLabel containsString:@"ABC"]) {
+            return YES;
+          }
+          return NO;
+        }];
+        
+        XCTAssertTrue(foundElement, @"Couldn't find element with text in %d seconds", TIMEOUT_SECONDS);
+        [testExpection fulfill];
+      });
     
-    foundElement = [self findSubviewInView:view matching:^BOOL(UIView *view) {
-      if ([view.accessibilityLabel containsString:@"hot code"] &&
-          [view.accessibilityLabel containsString:@"ABC"]) {
-        return YES;
-      }
-      return NO;
-    }];
-  }
+  }];
   
-  XCTAssertTrue(foundElement, @"Couldn't find element with text in %d seconds", TIMEOUT_SECONDS);
+  [self waitForExpectationsWithTimeout:5 handler:nil];
 }
 
 -(void) testNewBuildImage {
-  [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-def.json"];
+  [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
   [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.11/hello-world-images.zip"];
   
-  [self fetchBuildSync];
+  XCTestExpectation *testExpection = [self expectationWithDescription:@"Expect new JS code"];
   
-  NSURL *jsCodeLocation = [[AppHub buildManager].currentBuild.bundle URLForResource:@"main"
-                                                                             withExtension:@"jsbundle"];
-  RCTRootView *view = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                  moduleName:@"HelloWorld"
-                                           initialProperties:nil
-                                               launchOptions:nil];
-  
-  NSDate *date = [NSDate dateWithTimeIntervalSinceNow:TIMEOUT_SECONDS];
-  BOOL foundElement = NO;
-  
-  while ([date timeIntervalSinceNow] > 0 && !foundElement) {
-    [[NSRunLoop mainRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-    [[NSRunLoop mainRunLoop] runMode:NSRunLoopCommonModes beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+  [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
+    NSURL *jsCodeLocation = [[AppHub buildManager].currentBuild.bundle URLForResource:@"main"
+                                                                        withExtension:@"jsbundle"];
+    RCTRootView *view = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                    moduleName:@"HelloWorld"
+                                             initialProperties:nil
+                                                 launchOptions:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+      BOOL foundElement = [self findSubviewInView:view matching:^BOOL(UIView *view) {
+        return [view isKindOfClass:[UIImageView class]];
+      }];
+      
+      XCTAssertTrue(foundElement, @"Couldn't find element with text in %d seconds", TIMEOUT_SECONDS);
+      [testExpection fulfill];
+    });
     
-    foundElement = [self findSubviewInView:view matching:^BOOL(UIView *view) {
-      if ([view isKindOfClass:[UIImageView class]]) {
-        return YES;
-      }
-      return NO;
-    }];
-  }
+  }];
   
-  XCTAssertTrue(foundElement, @"Couldn't find element with text in %d seconds", TIMEOUT_SECONDS);
+  [self waitForExpectationsWithTimeout:5 handler:nil];
 }
 
 /*
