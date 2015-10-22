@@ -33,7 +33,7 @@
 }
 
 -(void) fetchBuildWithCompletionHandler:(AHBuildResultBlock)completionHandler {
-    XCTestExpectation *fetchedBuild = [self expectationWithDescription:@"fetching a build"];
+    __weak XCTestExpectation *fetchedBuild = [self expectationWithDescription:@"fetching a build"];
     [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
         completionHandler(result, error);
         [fetchedBuild fulfill];
