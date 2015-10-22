@@ -1,5 +1,7 @@
 # AppHub
 
+![](https://circleci.com/gh/AppHubPlatform/apphub-ios.png?circle-token=shield)
+
 apphub-ios is an iOS client for [AppHub](https://apphub.io).
 
 AppHub lets you instantly update React Native apps without resubmitting to the App Store.
