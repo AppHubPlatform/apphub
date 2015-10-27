@@ -22,17 +22,15 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		4023CC0F1BDF2CFE0080286F /* AHBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 4023CC0B1BDF2CFE0080286F /* AHBuild.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4023CC101BDF2CFE0080286F /* AHBuildManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4023CC0C1BDF2CFE0080286F /* AHBuildManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4023CC111BDF2CFE0080286F /* AHDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 4023CC0D1BDF2CFE0080286F /* AHDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4023CC121BDF2CFE0080286F /* AppHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 4023CC0E1BDF2CFE0080286F /* AppHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		403CB84A1B6368D500521BDF /* Cow.png in Resources */ = {isa = PBXBuildFile; fileRef = 403CB8491B6368D500521BDF /* Cow.png */; };
 		403CB84C1B6369DE00521BDF /* Pig.png in Resources */ = {isa = PBXBuildFile; fileRef = 403CB84B1B6369DE00521BDF /* Pig.png */; };
+		403CB84E1B6372D100521BDF /* AHBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB84D1B6372D100521BDF /* AHBuild.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		403CB8501B63733300521BDF /* AHBuild.m in Sources */ = {isa = PBXBuildFile; fileRef = 403CB84F1B63733300521BDF /* AHBuild.m */; };
 		403CB8611B637AA800521BDF /* AHPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 403CB8601B637AA800521BDF /* AHPaths.m */; };
 		403CB86B1B6381E000521BDF /* AHFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 403CB86A1B6381E000521BDF /* AHFileSystem.m */; };
 		40765E991B6345EB000594CC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40765E981B6345EB000594CC /* libz.dylib */; };
 		40765E9B1B634604000594CC /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40765E9A1B634604000594CC /* libOCMock.a */; };
+		40825FE31B6343E500A8A506 /* AHBuildManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 40825FD01B6343E500A8A506 /* AHBuildManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40825FE41B6343E500A8A506 /* AHBuildManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD11B6343E500A8A506 /* AHBuildManager.m */; };
 		40825FE71B6343E500A8A506 /* AHBuildsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD41B6343E500A8A506 /* AHBuildsListViewController.m */; };
 		40825FE91B6343E500A8A506 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD71B6343E500A8A506 /* ioapi.c */; };
@@ -53,9 +51,11 @@
 		552C6FE41B807ACB003846F8 /* AppHubReactModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 552C6FE31B807ACB003846F8 /* AppHubReactModule.m */; };
 		55357A031B800FD40033A332 /* libAppHubTestUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 553579FC1B800FBF0033A332 /* libAppHubTestUtils.a */; };
 		55357A041B800FE40033A332 /* AppHubTestBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 553579FE1B800FBF0033A332 /* AppHubTestBundle.bundle */; };
+		55357A051B80128B0033A332 /* AppHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB8621B637F2B00521BDF /* AppHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55357A061B8012920033A332 /* AHPaths.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB85E1B637A9900521BDF /* AHPaths.h */; };
 		55357A071B8012960033A332 /* AHLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 5504F97E1B7DAB3C00D85C4D /* AHLogging.h */; };
 		55357A081B8012980033A332 /* AHFileSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB8681B6381BF00521BDF /* AHFileSystem.h */; };
+		55357A091B80129C0033A332 /* AHDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 834003F51B7FA2EE00EC37F3 /* AHDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55357A0A1B80129F0033A332 /* AHConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 834003F81B7FA74300EC37F3 /* AHConstants.h */; };
 		55357A0B1B8012A20033A332 /* AHBuildsListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 40825FD31B6343E500A8A506 /* AHBuildsListViewController.h */; };
 		55357A0C1B8012A50033A332 /* AHBuildManager+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 40825FD21B6343E500A8A506 /* AHBuildManager+Private.h */; };
@@ -124,20 +124,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4023CC0B1BDF2CFE0080286F /* AHBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHBuild.h; path = Headers/AHBuild.h; sourceTree = "<group>"; };
-		4023CC0C1BDF2CFE0080286F /* AHBuildManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHBuildManager.h; path = Headers/AHBuildManager.h; sourceTree = "<group>"; };
-		4023CC0D1BDF2CFE0080286F /* AHDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AHDefines.h; path = Headers/AHDefines.h; sourceTree = "<group>"; };
-		4023CC0E1BDF2CFE0080286F /* AppHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppHub.h; path = Headers/AppHub.h; sourceTree = "<group>"; };
 		403CB8491B6368D500521BDF /* Cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cow.png; path = "Supporting Files/Cow.png"; sourceTree = "<group>"; };
 		403CB84B1B6369DE00521BDF /* Pig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pig.png; path = "Supporting Files/Pig.png"; sourceTree = "<group>"; };
+		403CB84D1B6372D100521BDF /* AHBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHBuild.h; sourceTree = "<group>"; };
 		403CB84F1B63733300521BDF /* AHBuild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHBuild.m; sourceTree = "<group>"; };
 		403CB8511B63747200521BDF /* AHBuild+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AHBuild+Private.h"; sourceTree = "<group>"; };
 		403CB85E1B637A9900521BDF /* AHPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHPaths.h; sourceTree = "<group>"; };
 		403CB8601B637AA800521BDF /* AHPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHPaths.m; sourceTree = "<group>"; };
+		403CB8621B637F2B00521BDF /* AppHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHub.h; sourceTree = "<group>"; };
 		403CB8681B6381BF00521BDF /* AHFileSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AHFileSystem.h; sourceTree = "<group>"; };
 		403CB86A1B6381E000521BDF /* AHFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHFileSystem.m; sourceTree = "<group>"; };
 		40765E981B6345EB000594CC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		40765E9A1B634604000594CC /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		40825FD01B6343E500A8A506 /* AHBuildManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHBuildManager.h; sourceTree = "<group>"; };
 		40825FD11B6343E500A8A506 /* AHBuildManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHBuildManager.m; sourceTree = "<group>"; };
 		40825FD21B6343E500A8A506 /* AHBuildManager+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AHBuildManager+Private.h"; sourceTree = "<group>"; };
 		40825FD31B6343E500A8A506 /* AHBuildsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHBuildsListViewController.h; sourceTree = "<group>"; };
@@ -171,6 +170,7 @@
 		555FF3AF1B37AC8D0064F175 /* libAppHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppHub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		555FF3BA1B37AC8D0064F175 /* AppHub.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppHub.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5588227B1B806AEF00FCC175 /* AppHub+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppHub+Private.h"; sourceTree = "<group>"; };
+		834003F51B7FA2EE00EC37F3 /* AHDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AHDefines.h; sourceTree = "<group>"; };
 		834003F61B7FA65500EC37F3 /* AHConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHConstants.m; sourceTree = "<group>"; };
 		834003F81B7FA74300EC37F3 /* AHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,17 +198,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4023CC131BDF2D720080286F /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				4023CC0B1BDF2CFE0080286F /* AHBuild.h */,
-				4023CC0C1BDF2CFE0080286F /* AHBuildManager.h */,
-				4023CC0D1BDF2CFE0080286F /* AHDefines.h */,
-				4023CC0E1BDF2CFE0080286F /* AppHub.h */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
 		40825FD51B6343E500A8A506 /* minizip */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,15 +246,17 @@
 		555FF3B11B37AC8D0064F175 /* AppHub */ = {
 			isa = PBXGroup;
 			children = (
-				4023CC131BDF2D720080286F /* Headers */,
+				403CB84D1B6372D100521BDF /* AHBuild.h */,
 				403CB84F1B63733300521BDF /* AHBuild.m */,
 				403CB8511B63747200521BDF /* AHBuild+Private.h */,
 				40825FD21B6343E500A8A506 /* AHBuildManager+Private.h */,
+				40825FD01B6343E500A8A506 /* AHBuildManager.h */,
 				40825FD11B6343E500A8A506 /* AHBuildManager.m */,
 				40825FD31B6343E500A8A506 /* AHBuildsListViewController.h */,
 				40825FD41B6343E500A8A506 /* AHBuildsListViewController.m */,
 				834003F81B7FA74300EC37F3 /* AHConstants.h */,
 				834003F61B7FA65500EC37F3 /* AHConstants.m */,
+				834003F51B7FA2EE00EC37F3 /* AHDefines.h */,
 				403CB8681B6381BF00521BDF /* AHFileSystem.h */,
 				403CB86A1B6381E000521BDF /* AHFileSystem.m */,
 				5504F97E1B7DAB3C00D85C4D /* AHLogging.h */,
@@ -273,6 +264,7 @@
 				403CB85E1B637A9900521BDF /* AHPaths.h */,
 				403CB8601B637AA800521BDF /* AHPaths.m */,
 				5588227B1B806AEF00FCC175 /* AppHub+Private.h */,
+				403CB8621B637F2B00521BDF /* AppHub.h */,
 				5504F9A51B7DC44000D85C4D /* AppHub.m */,
 				552C6FE31B807ACB003846F8 /* AppHubReactModule.m */,
 				40936D1B1B9148D400F59A18 /* AHReachability.h */,
@@ -317,19 +309,19 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4023CC101BDF2CFE0080286F /* AHBuildManager.h in Headers */,
-				4023CC111BDF2CFE0080286F /* AHDefines.h in Headers */,
-				4023CC121BDF2CFE0080286F /* AppHub.h in Headers */,
-				4023CC0F1BDF2CFE0080286F /* AHBuild.h in Headers */,
 				55357A0C1B8012A50033A332 /* AHBuildManager+Private.h in Headers */,
 				55357A081B8012980033A332 /* AHFileSystem.h in Headers */,
 				55357A0A1B80129F0033A332 /* AHConstants.h in Headers */,
+				55357A091B80129C0033A332 /* AHDefines.h in Headers */,
 				55357A0D1B8012AA0033A332 /* AHBuild+Private.h in Headers */,
 				55357A071B8012960033A332 /* AHLogging.h in Headers */,
 				55357A061B8012920033A332 /* AHPaths.h in Headers */,
 				55357A0B1B8012A20033A332 /* AHBuildsListViewController.h in Headers */,
 				5588227C1B806AEF00FCC175 /* AppHub+Private.h in Headers */,
+				40825FE31B6343E500A8A506 /* AHBuildManager.h in Headers */,
 				40936D1D1B9148D400F59A18 /* AHReachability.h in Headers */,
+				403CB84E1B6372D100521BDF /* AHBuild.h in Headers */,
+				55357A051B80128B0033A332 /* AppHub.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
