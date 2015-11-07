@@ -1,11 +1,11 @@
 {
-  "name": "AppHubIntegration",
+  "name": "HelloWorld",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "react-native": "0.14.0-rc"
+    "react-native": "git://github.com/facebook/react-native#cd3865a14d62ae7555492d45375a2dd8f7407b83"
   }
 }

@@ -30,6 +30,7 @@
 		403CB86B1B6381E000521BDF /* AHFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 403CB86A1B6381E000521BDF /* AHFileSystem.m */; };
 		40765E991B6345EB000594CC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40765E981B6345EB000594CC /* libz.dylib */; };
 		40765E9B1B634604000594CC /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40765E9A1B634604000594CC /* libOCMock.a */; };
+		407A2AAC1BDCB2AB00C13A5B /* NSURLRequest+AppHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 407A2AAB1BDCB2AB00C13A5B /* NSURLRequest+AppHub.m */; settings = {ASSET_TAGS = (); }; };
 		40825FE31B6343E500A8A506 /* AHBuildManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 40825FD01B6343E500A8A506 /* AHBuildManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40825FE41B6343E500A8A506 /* AHBuildManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD11B6343E500A8A506 /* AHBuildManager.m */; };
 		40825FE71B6343E500A8A506 /* AHBuildsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40825FD41B6343E500A8A506 /* AHBuildsListViewController.m */; };
@@ -136,6 +137,7 @@
 		403CB86A1B6381E000521BDF /* AHFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHFileSystem.m; sourceTree = "<group>"; };
 		40765E981B6345EB000594CC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		40765E9A1B634604000594CC /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		407A2AAB1BDCB2AB00C13A5B /* NSURLRequest+AppHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+AppHub.m"; sourceTree = "<group>"; };
 		40825FD01B6343E500A8A506 /* AHBuildManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHBuildManager.h; sourceTree = "<group>"; };
 		40825FD11B6343E500A8A506 /* AHBuildManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHBuildManager.m; sourceTree = "<group>"; };
 		40825FD21B6343E500A8A506 /* AHBuildManager+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AHBuildManager+Private.h"; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				40936D1C1B9148D400F59A18 /* AHReachability.m */,
 				40825FD51B6343E500A8A506 /* minizip */,
 				40825FE21B6343E500A8A506 /* UIImage+AppHub.m */,
+				407A2AAB1BDCB2AB00C13A5B /* NSURLRequest+AppHub.m */,
 			);
 			path = AppHub;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				403CB86B1B6381E000521BDF /* AHFileSystem.m in Sources */,
 				40825FE41B6343E500A8A506 /* AHBuildManager.m in Sources */,
 				40825FE91B6343E500A8A506 /* ioapi.c in Sources */,
+				407A2AAC1BDCB2AB00C13A5B /* NSURLRequest+AppHub.m in Sources */,
 				5504F9811B7DAB4E00D85C4D /* AHLogging.m in Sources */,
 				403CB8611B637AA800521BDF /* AHPaths.m in Sources */,
 				40825FF21B6343E500A8A506 /* AH_SSZipArchive.m in Sources */,
