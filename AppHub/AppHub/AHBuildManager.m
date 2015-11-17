@@ -47,6 +47,8 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
         self.cellularDownloadsEnabled = NO;
         self.debugBuildsEnabled = NO;
         self.completionHandlers = [[NSMutableArray alloc] init];
+        
+        [self cleanBuilds];
     }
     
     return self;
