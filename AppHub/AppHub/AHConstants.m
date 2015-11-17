@@ -8,7 +8,7 @@
 #import "AHDefines.h"
 #import "AHConstants.h"
 
-NSString *const AHSDKVersion = @"0.2.1";
+NSString *const AHSDKVersion = @"0.2.2";
 
 // NSString *const AHEndpoint = @"http://apphub-staging.herokuapp.com/v1";
 NSString *const AHEndpoint = @"https://api.apphub.io/v1";
