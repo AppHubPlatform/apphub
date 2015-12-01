@@ -20,6 +20,8 @@ Example usage:
 
  */
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface AHBuild : NSObject
 
 ///---------------------
@@ -49,9 +51,11 @@ Example usage:
 @property (nonatomic, readonly) NSString *buildDescription;
 
 /// The date at which the build was created.
-@property (nonatomic, readonly) NSDate *creationDate;
+@property (nullable, nonatomic, readonly) NSDate *creationDate;
 
 /// An array of iOS app version strings with which the build is compatible.
 @property (nonatomic, readonly) NSArray *compatibleIOSVersions;
 
 @end
+
+NS_ASSUME_NONNULL_END
