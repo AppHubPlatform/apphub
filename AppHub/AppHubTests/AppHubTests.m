@@ -67,7 +67,7 @@
         XCTAssertEqualObjects(result.identifier, dict[AHBuildDataBuildIDKey]);
         XCTAssertEqualObjects(result.name, dict[AHBuildDataNameKey]);
         XCTAssertEqualObjects(result.buildDescription, dict[AHBuildDataDescriptionKey]);
-        XCTAssertEqualObjects(result.compatibleIOSVersions, dict[AHBuildDataCompatibleIOSVersionsKey]);
+        XCTAssertEqualObjects(result.compatibleIOSVersions, [dict[AHBuildDataCompatibleIOSVersionsKey] allValues]);
         
         NSTimeInterval creationDate = [result.creationDate timeIntervalSince1970];
         NSTimeInterval createdSeconds = [dict[AHBuildDataCreatedAtKey] doubleValue] / 1000;

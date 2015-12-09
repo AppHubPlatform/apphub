@@ -37,7 +37,7 @@ NS_INLINE NSString *AHShortVersionString(void)
     if ((self = [super init])) {
         _buildDescription = [info[AHBuildDataDescriptionKey] copy] ?: @"This build was downloaded from the App Store.";
         _bundle = bundle ?: [NSBundle mainBundle];
-        _compatibleIOSVersions = info[AHBuildDataCompatibleIOSVersionsKey] ?: AHShortVersionString();
+        _compatibleIOSVersions = [info[AHBuildDataCompatibleIOSVersionsKey] allValues] ?: @[AHShortVersionString()];
         _creationDate = [NSDate dateWithTimeIntervalSince1970:[info[AHBuildDataCreatedAtKey] doubleValue] / 1000.0];
         _identifier = [info[AHBuildDataBuildIDKey] copy] ?: AHDefaultBuildID;
         _name = [info[AHBuildDataNameKey] copy] ?: AHDefaultBuildID;
