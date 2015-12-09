@@ -38,11 +38,12 @@ NS_INLINE NSString *AHShortVersionString(void)
         _buildDescription = [info[AHBuildDataDescriptionKey] copy] ?: @"This build was downloaded from the App Store.";
         _bundle = bundle ?: [NSBundle mainBundle];
         _compatibleIOSVersions = [info[AHBuildDataCompatibleIOSVersionsKey] allValues] ?: @[AHShortVersionString()];
-        _creationDate = [NSDate dateWithTimeIntervalSince1970:[info[AHBuildDataCreatedAtKey] doubleValue] / 1000.0];
+        if (info[AHBuildDataCreatedAtKey]) {
+            _creationDate = [NSDate dateWithTimeIntervalSince1970:[info[AHBuildDataCreatedAtKey] doubleValue] / 1000.0];
+        }
         _identifier = [info[AHBuildDataBuildIDKey] copy] ?: AHDefaultBuildID;
         _name = [info[AHBuildDataNameKey] copy] ?: AHDefaultBuildID;
     }
-    
     return self;
 }
 
@@ -62,7 +63,7 @@ NS_INLINE NSString *AHShortVersionString(void)
         AHExportedBuildDataBuildIDKey: _identifier,
         AHExportedBuildDataNameKey: _name,
         AHExportedBuildDataDescriptionKey: _buildDescription,
-        AHExportedBuildDataCreatedAtKey: @(_creationDate.timeIntervalSince1970 * 1000.0),
+        AHExportedBuildDataCreatedAtKey: _creationDate ? @(_creationDate.timeIntervalSince1970 * 1000.0) : [NSNull null],
         AHExportedBuildDataCompatibleIOSVersionsKey: _compatibleIOSVersions,
     };
 }

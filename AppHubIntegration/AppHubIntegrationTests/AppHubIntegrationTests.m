@@ -65,7 +65,7 @@ static XCTestExpectation *_newBuildExpectation;
     [[NSRunLoop mainRunLoop] runMode:NSRunLoopCommonModes beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     
     foundElement = [self findSubviewInView:vc.view matching:^BOOL(UIView *view) {
-      if ([view.accessibilityLabel isEqualToString:@"buildIdentifier:LOCALbuildName:LOCALbuildDescription:This build was downloaded from the App Store.buildCreatedAt:0buildCompatibleIOSVersions:1.0"]) {
+      if ([view.accessibilityLabel isEqualToString:@"buildIdentifier:LOCALbuildName:LOCALbuildDescription:This build was downloaded from the App Store.buildCreatedAt:buildCompatibleIOSVersions:1.0"]) {
         return YES;
       }
       return NO;

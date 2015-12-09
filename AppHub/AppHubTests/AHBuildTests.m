@@ -30,7 +30,7 @@
         XCTAssertNotNil(build.name);
         XCTAssertNotNil(build.buildDescription);
         XCTAssertNotNil(build.compatibleIOSVersions);
-        XCTAssertNotNil(build.creationDate);
+        XCTAssertNil(build.creationDate);
         XCTAssertEqualObjects(build.identifier, @"LOCAL");
         XCTAssertEqualObjects(build.bundle, [NSBundle mainBundle]);
     }
