@@ -1,0 +1,16 @@
+{
+  "name": "apphub",
+  "version": "0.3.0",
+  "description": "React Native module for integrating with AppHub",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AppHubPlatform/apphub.git"
+  },
+  "author": "AppHub <support@apphub.io>)",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/AppHubPlatform/apphub/issues"
+  },
+  "homepage": "https://github.com/AppHubPlatform/apphub"
+}
