@@ -1,8 +1,11 @@
 {
   "name": "apphub",
-  "version": "0.3.0",
+  "version": "0.3.1-rc0",
   "description": "React Native module for integrating with AppHub",
   "main": "index.js",
+  "bin": {
+    "apphub": "./cli/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/AppHubPlatform/apphub.git"
