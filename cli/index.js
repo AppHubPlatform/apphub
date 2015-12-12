@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var execSync = require('child_process').execSync;
 var path = require('path');
 var uuid = require('node-uuid');
