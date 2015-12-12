@@ -9,6 +9,10 @@ var argv = require('yargs')
   .usage('apphub <command>')
   .command('build', 'build a zip that can be uploaded to AppHub', function (yargs, argv) {
     argv = yargs
+      .option('output-zip', {
+        description: 'Output zip relative path',
+        required: true,
+      })
       .option('entry-file', {
         description: 'Path to the root JS file, either absolute or relative to JS root',
         default: 'index.ios.js',
@@ -18,20 +22,17 @@ var argv = require('yargs')
         default: 'main.jsbundle',
       })
       .option('plist-file', {
-        description: 'Relative location to the project Info.plist',
+        description: "Relative location to the project's Info.plist",
       })
       .option('dev',  {
         default: false,
         description: 'If false, warnings are disabled and the bundle is minified'
       })
-      .option('output-zip', {
-        description: 'Output zip relative path',
-        required: true,
-      })
       .help('help')
       .argv
 
-    var plistFile = argv.plistFile || path.join('ios', path.basename(process.cwd()), 'Info.plist');
+    var projectName = require(path.join(process.cwd(), 'package.json')).name;
+    var plistFile = argv.plistFile || path.join('ios', projectName, 'Info.plist');
     var outputZip = path.join(process.cwd(), argv.outputZip);
     var tmpDir = '/tmp/apphub/' + uuid.v4();
     var buildDir = tmpDir + '/build';
@@ -44,9 +45,16 @@ var argv = require('yargs')
       '--assets-dest', buildDir,
     ];
 
-    execSync('react-native bundle ' + options.join(' '), { stdio: [0, 1, 2] });
-    execSync('cp ' + plistFile + ' ' + buildDir);
-    execSync('cd ' + tmpDir + ' && zip -r ' + outputZip + ' build/', { stdio: [0, 1, 2] });
+    var cmds = [
+      'react-native bundle ' + options.join(' '),
+      'cp ' + plistFile + ' ' + buildDir,
+      'cd ' + tmpDir + ' && zip -r ' + outputZip + ' build/',
+    ];
+    for (var i = 0; i < cmds.length; i++) {
+      var cmd = cmds[i];
+      console.log(cmd);
+      execSync(cmd, { stdio: [0, 1, 2] });
+    }
   })
   .help('help')
   .argv;
