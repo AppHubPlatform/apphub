@@ -180,7 +180,13 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
 {
     // Check whether there's a new build to download and get the current build data from the server.
     NSString *appVersion = [self installedAppVersion];
+    
+#if TARGET_IPHONE_SIMULATOR
+    NSString *deviceID = [NSBundle mainBundle].bundlePath;
+#else
     NSString *deviceID = [UIDevice currentDevice].identifierForVendor.UUIDString;
+#endif
+    
     NSString *getBuildRequestString = [NSString stringWithFormat:@"%@/projects/%@/build?sdk_version=%@&app_version=%@&device_uid=%@&debug=%d", AHEndpoint, [AppHub applicationID], AHSDKVersion, appVersion, deviceID, _debugBuildsEnabled];
 
     AHLog(AHLogLevelDebug, @"Downloading build information from URL: %@", getBuildRequestString);
