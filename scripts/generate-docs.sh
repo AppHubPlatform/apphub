@@ -1,3 +1,5 @@
+#!/bin/bash
+
 appledoc AppHub/AppHub.xcodeproj \
 --project-name 'AppHub iOS SDK' \
 --project-company "AppHub" \
