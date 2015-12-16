@@ -11,7 +11,7 @@ case $response in
       git tag $1
       git push --tags
       npm publish
-      pod trunk push AppHub.podspec
+      pod trunk push AppHub.podspec --allow-warnings
         ;;
     *)
 
