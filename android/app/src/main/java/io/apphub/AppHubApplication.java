@@ -25,7 +25,6 @@ public class AppHubApplication {
         return mBuildManager;
     }
 
-
     protected String getDeviceUUID() {
         Context context = AppHub.getContext();
 

@@ -1,3 +1,4 @@
 rootProject.name = 'IntegrationTests'
 
-include ':app'
+include ':app', ':apphub'
+project(':apphub').projectDir = new File(rootProject.projectDir, '../../app')

@@ -147,7 +147,7 @@ public class AppHubBuild {
         public AppHubBuild createDefaultBuildInstance() {
             return this
                     .identifier(DEFAULT_BUILD_IDENTIFIER)
-                    .description("This build was downloaded from the App Store.")
+                    .description("This build was downloaded from the Play Store.")
                     .name(DEFAULT_BUILD_IDENTIFIER)
                     .compatibleVersions(new String[]{ BuildConfig.VERSION_NAME })
                     .creationDate(new Date())
