@@ -10,7 +10,7 @@ var argv = require('yargs')
   .command('build', 'build a zip that can be uploaded to AppHub', function (yargs, argv) {
     argv = yargs
       .option('o', {
-        alias: 'output-file',
+        alias: 'output-zip',
         description: 'Output zip relative path',
         required: true,
       })
