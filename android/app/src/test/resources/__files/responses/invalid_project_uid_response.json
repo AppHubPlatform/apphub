@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "data": {
+    "type": "GET-BUILD",
+    "s3_url": "https://aws.amazon.com/abc",
+    "uid": "ABC",
+    "project_uid": "WRONG_PROJECT_UID",
+    "app_versions": {"1.0": "1.0"},
+    "description": "Working",
+    "created": "1436336352118",
+    "name": "My Build"
+  }
+}
