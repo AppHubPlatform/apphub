@@ -1,8 +1,5 @@
 package io.apphub;
 
-/**
- * Created by mata on 9/13/15.
- */
 public enum AppHubLogLevel {
     NONE(0),
     DEBUG(1),

@@ -2,9 +2,6 @@ package io.apphub;
 
 import android.util.Log;
 
-/**
- * Created by mata on 9/13/15.
- */
 public class AppHubLog {
 
     private static void println(int priority, String tag, String message) {

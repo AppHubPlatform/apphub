@@ -41,7 +41,8 @@ public class AppHubBuildManager {
 
     protected AppHubBuildManager(AppHubApplication application) {
         mApplication = new WeakReference<AppHubApplication>(application);
-        mSharedPreferencesLatestBuildJsonKey = "__APPHUB__/" + application.getApplicationID() + "/LATEST_BUILD_JSON";
+        mSharedPreferencesLatestBuildJsonKey = "__APPHUB__/" +
+                application.getApplicationID() + "/LATEST_BUILD_JSON";
 
         cleanBuilds();
 
@@ -211,7 +212,8 @@ public class AppHubBuildManager {
                         continue;
                     }
 
-                    FileOutputStream fout = new FileOutputStream(new File(buildDirectory, filename));
+                    FileOutputStream fout = new FileOutputStream(
+                            new File(buildDirectory, filename));
 
                     while ((count = zis.read(buffer)) != -1) {
                         fout.write(buffer, 0, count);
@@ -241,14 +243,16 @@ public class AppHubBuildManager {
 
             // Do not download if the new build matches our current build.
             if (latestBuild.getIdentifier().equals(build.getIdentifier())) {
-                AppHubLog.d(String.format("Already downloaded build with ID: %s", build.getIdentifier()));
+                AppHubLog.d(String.format("Already downloaded build with ID: %s",
+                        build.getIdentifier()));
                 return true;
             }
 
             // Ensure that application ids match.
             if (! build.getProjectIdentifier().equals(applicationID)) {
                 error = new AppHubException(AppHubException.SERVER_FAILURE,
-                        String.format("Build contains application ID: '%s', which differs from expected '%s",
+                        String.format("Build contains application ID: '%s', " +
+                                        "which differs from expected '%s",
                                 build.getProjectIdentifier(), applicationID));
                 return false;
             }
@@ -257,25 +261,27 @@ public class AppHubBuildManager {
             if (! build.getCompatibleVersions().contains(AppHubUtils.getApplicationVersion())) {
                 error = new AppHubException(AppHubException.SERVER_FAILURE,
                         String.format("Current version of app: '%s', is not contain in versions " +
-                                        "in downloaded build: '%s", build.getProjectIdentifier(), applicationID));
+                                        "in downloaded build: '%s", build.getProjectIdentifier(),
+                                applicationID));
                 return false;
             }
 
             // Download the build and save it to a path.
             try {
                 File buildDirectory = build.getBuildDirectory();
-                File zipFile = AppHubAPI.downloadFile(build.getS3Url(), buildDirectory);
+                File zipFile = AppHubAPI.downloadFile(build.getBuildUrl(), buildDirectory);
                 if (zipFile == null) {
                     error = new AppHubException(AppHubException.BUILD_DOWNLOAD_FAILURE,
                             String.format("Failed to download build from url %s to %s",
-                                    build.getS3Url(), buildDirectory.getPath()));
+                                    build.getBuildUrl(), buildDirectory.getPath()));
                 }
 
                 boolean success = unpackZip(buildDirectory, zipFile);
 
                 if (! success) {
                     throw new AppHubException(AppHubException.BUILD_DOWNLOAD_FAILURE,
-                            String.format("Unable to uncompress zip file to dir: %s", buildDirectory.getPath()));
+                            String.format("Unable to uncompress zip file to dir: %s",
+                                    buildDirectory.getPath()));
                 }
             } catch (AppHubException e) {
                 error = e;
@@ -287,6 +293,8 @@ public class AppHubBuildManager {
 
         @Override
         protected Boolean doInBackground(FetchBuildCallback ... params) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                            AppHub.getContext());
             try {
                 callback = params[0];
 
@@ -317,8 +325,8 @@ public class AppHubBuildManager {
                     case BUILD_DATA_GET_BUILD_TYPE:
                         boolean success = downloadFromBuildData(buildData);
                         if (success) {
-                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
-                            success = prefs.edit().putString(mSharedPreferencesLatestBuildJsonKey, buildData.toString()).commit();
+                            success = prefs.edit().putString(mSharedPreferencesLatestBuildJsonKey,
+                                    buildData.toString()).commit();
                         }
 
                         return success;
@@ -326,8 +334,6 @@ public class AppHubBuildManager {
                     case BUILD_DATA_NO_BUILD_TYPE:
                         // Clear the old build information. We will clean the build directory
                         // only at startup.
-
-                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
                         return prefs.edit().remove(mSharedPreferencesLatestBuildJsonKey).commit();
 
                     default:

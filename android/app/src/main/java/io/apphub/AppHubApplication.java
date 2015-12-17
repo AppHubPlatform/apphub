@@ -5,9 +5,6 @@ import android.telephony.TelephonyManager;
 
 import java.util.UUID;
 
-/**
- * Created by mata on 9/13/15.
- */
 public class AppHubApplication {
     private final String mApplicationID;
     private final AppHubBuildManager mBuildManager;

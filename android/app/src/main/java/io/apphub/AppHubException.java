@@ -1,8 +1,5 @@
 package io.apphub;
 
-/**
- * Created by mata on 9/20/15.
- */
 public class AppHubException extends Exception {
     private static final long serialVersionUID = 1;
     private int code;

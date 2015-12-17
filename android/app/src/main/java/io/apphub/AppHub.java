@@ -2,9 +2,6 @@ package io.apphub;
 
 import android.content.Context;
 
-/**
- * Created by mata on 9/11/15.
- */
 public class AppHub {
 
     private static final String SDKVersion = "0.0.1";

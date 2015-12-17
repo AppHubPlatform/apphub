@@ -11,15 +11,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/**
- * Created by mata on 9/20/15.
- */
 public class AppHubBuild {
     private static final String DEFAULT_BUILD_IDENTIFIER = "LOCAL_BUILD";
 
     private final String mUid;
     private final String mProjectUid;
-    private final String mS3Url;
+    private final String mBuildUrl;
     private final String mName;
     private final String mDescription;
     private final Date mCreated;
@@ -37,8 +34,8 @@ public class AppHubBuild {
     public String getDescription() {
         return mDescription;
     }
-    public String getS3Url() {
-        return mS3Url;
+    public String getBuildUrl() {
+        return mBuildUrl;
     }
 
     public Date getCreationDate() {
@@ -68,7 +65,7 @@ public class AppHubBuild {
     protected AppHubBuild(AppHubBuildManager manager, JSONObject obj) throws JSONException {
         mUid = obj.getString("uid");
         mProjectUid = obj.getString("project_uid");
-        mS3Url = obj.getString("s3_url");
+        mBuildUrl = obj.getString("s3_url");
         mName = obj.getString("name");
         mDescription = obj.getString("description");
         mCreated = new Date(obj.getLong("created"));
@@ -84,7 +81,7 @@ public class AppHubBuild {
     protected AppHubBuild(AppHubBuildManager manager) {
         mUid = DEFAULT_BUILD_IDENTIFIER;
         mProjectUid = null;
-        mS3Url = null;
+        mBuildUrl = null;
         mName = DEFAULT_BUILD_IDENTIFIER;
         mDescription = "This build was downloaded from the Play Store.";
         mCreated = new Date();

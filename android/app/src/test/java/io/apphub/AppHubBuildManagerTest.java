@@ -17,6 +17,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -264,13 +265,24 @@ public class AppHubBuildManagerTest extends AppHubBaseTest {
 
     @Test
     public void testCleanBuildIsRunOnAppLaunch() throws Exception {
-        String oldResponseData = new JSONObject(readFile("responses/invalid_app_version_response.json"))
+        String responseData = new JSONObject(readFile("responses/invalid_app_version_response.json"))
                 .getJSONObject("data").toString();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
-        prefs.edit().putString(manager.mSharedPreferencesLatestBuildJsonKey, oldResponseData).apply();
+        prefs.edit().putString(manager.mSharedPreferencesLatestBuildJsonKey, responseData).apply();
 
         new AppHubApplication("123");
         assertNull(prefs.getString(manager.mSharedPreferencesLatestBuildJsonKey, null));
+    }
+
+    @Test
+    public void testCleanBuildDoesNotClearValidBuild() throws Exception {
+        String responseData = new JSONObject(readFile("responses/valid_get_build_response.json"))
+                .getJSONObject("data").toString();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
+        prefs.edit().putString(manager.mSharedPreferencesLatestBuildJsonKey, responseData).apply();
+
+        manager.cleanBuilds();
+        assertNotNull(prefs.getString(manager.mSharedPreferencesLatestBuildJsonKey, null));
     }
 
     @Test

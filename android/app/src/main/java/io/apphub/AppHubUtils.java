@@ -6,9 +6,6 @@ import android.content.pm.PackageManager;
 
 import java.io.File;
 
-/**
- * Created by mata on 9/20/15.
- */
 class AppHubUtils {
 
     protected static String getApplicationVersion() {
