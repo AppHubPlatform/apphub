@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -159,15 +160,86 @@ public class AppHubBuildManagerTest extends AppHubBaseTest {
             public void done(AppHubBuild build, AppHubException e) {
                 assertEquals("ABC", build.getIdentifier());
                 assertEquals("ABC", manager.getLatestBuild().getIdentifier());
-                assertEquals(build.getBundleAssetPathWithName("index.android.bundle"),
-                        AppHubPaths.getDirectoryForBuildUid(build.getIdentifier()).getAbsolutePath() +
-                                "/index.android.bundle");
+                File f = new File(build.getBundleAssetPathWithName("index.android.bundle"));
+                assertTrue(f.exists() && f.isFile());
 
                 signal.countDown();
             }
         });
 
         assertTrue(signal.await(2, TimeUnit.SECONDS));
+    }
+
+    @Test
+    public void testCleanBuildDoesNotRemoveCurrentBuild() throws Exception {
+        final CountDownLatch signal = new CountDownLatch(1);
+
+        String responseStr = readFile("responses/valid_get_build_response.json");
+        stubFor(get(urlMatching(".*build.*"))
+                .willReturn(aResponse().withStatus(200).withBody(responseStr)));
+
+        stubFor(get(urlMatching(".*amazon.*"))
+                .willReturn(aResponse().withStatus(200).withBodyFile("builds/react-0.11/no-images.zip")));
+
+        manager.fetchBuild(new FetchBuildCallback() {
+            @Override
+            public void done(AppHubBuild build, AppHubException e) {
+                manager.cleanBuilds();
+
+                File f = new File(build.getBundleAssetPathWithName("index.android.bundle"));
+                assertTrue(f.exists() && f.isFile());
+
+                signal.countDown();
+            }
+        });
+
+        assertTrue(signal.await(2, TimeUnit.SECONDS));
+    }
+
+    @Test
+    public void testCleanBuildRemovesOldBuild() throws Exception {
+
+        String responseStr = readFile("responses/valid_get_build_response.json");
+        stubFor(get(urlMatching(".*build.*"))
+                .willReturn(aResponse().withStatus(200).withBody(responseStr)));
+
+        stubFor(get(urlMatching(".*amazon.*"))
+                .willReturn(aResponse().withStatus(200).withBodyFile("builds/react-0.11/no-images.zip")));
+
+        final CountDownLatch signal = new CountDownLatch(1);
+
+        manager.fetchBuild(new FetchBuildCallback() {
+            @Override
+            public void done(final AppHubBuild build, AppHubException e) {
+                File f = new File(build.getBundleAssetPathWithName("index.android.bundle"));
+                assertTrue(f.exists() && f.isFile());
+
+                signal.countDown();
+            }
+        });
+
+        assertTrue(signal.await(2, TimeUnit.SECONDS));
+
+        AppHubBuild b = manager.getLatestBuild();
+
+        String noResponseStr = readFile("responses/valid_no_build_response.json");
+        stubFor(get(urlMatching(".*build.*"))
+                .willReturn(aResponse().withStatus(200).withBody(noResponseStr)));
+
+        final CountDownLatch signal2 = new CountDownLatch(1);
+        manager.fetchBuild(new FetchBuildCallback() {
+            @Override
+            public void done(AppHubBuild build, AppHubException e) {
+                signal2.countDown();
+            }
+        });
+
+        assertTrue(signal2.await(2, TimeUnit.SECONDS));
+
+        File f = new File(b.getBundleAssetPathWithName("index.android.bundle"));
+        assertTrue(f.exists() && f.isFile());
+        manager.cleanBuilds();
+        assertFalse(f.exists());
     }
 
     @Test

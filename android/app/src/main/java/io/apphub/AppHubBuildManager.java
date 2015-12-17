@@ -46,6 +46,8 @@ public class AppHubBuildManager {
         mApplication = new WeakReference<AppHubApplication>(application);
         mSharedPreferencesLatestBuildJsonKey = "__APPHUB__/" + application.getApplicationID() + "/LATEST_BUILD_JSON";
 
+        cleanBuilds();
+
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -54,18 +56,57 @@ public class AppHubBuildManager {
         }, 0, 10 * 1000); // Every 10 seconds.
     }
 
+    private static final String ROOT_DIR_NAME = "__APPHUB__";
+
+    protected File getRootBuildDirectory() {
+        File rootDirectory = new File(AppHub.getContext().getFilesDir(), ROOT_DIR_NAME);
+        return new File(rootDirectory, mApplication.get().getApplicationID());
+    }
+
+    private void deleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory()) {
+            for (File child : fileOrDirectory.listFiles()) {
+                deleteRecursive(child);
+            }
+        }
+
+        fileOrDirectory.delete();
+    }
+
+    protected void cleanBuilds() {
+        AppHubBuild latestBuild = getLatestBuild();
+
+        if (! latestBuild.getCompatibleVersions().contains(AppHubUtils.getApplicationVersion())) {
+            // We upgraded versions of the app, we should clear the cache.
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
+            prefs.edit().remove(mSharedPreferencesLatestBuildJsonKey).commit();
+        }
+
+        File[] buildDirectories = getRootBuildDirectory().listFiles();
+        if (buildDirectories == null) {
+            buildDirectories = new File[0];
+        }
+
+        for (File f : buildDirectories) {
+            if (! f.equals(getLatestBuild().getBuildDirectory())) {
+                deleteRecursive(f);
+            }
+        }
+    }
+
     public AppHubBuild getLatestBuild() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
         String latestBuildJson = prefs.getString(mSharedPreferencesLatestBuildJsonKey, null);
 
         if (latestBuildJson == null) {
-            return new AppHubBuild();
+            return new AppHubBuild(this);
         } else {
             try {
-                return new AppHubBuild(new JSONObject(latestBuildJson));
+                return new AppHubBuild(this, new JSONObject(latestBuildJson));
             } catch (JSONException e) {
                 AppHubLog.e("Failed to create build.", e);
-                return new AppHubBuild();
+                return new AppHubBuild(this);
             }
         }
     }
@@ -207,7 +248,7 @@ public class AppHubBuildManager {
         }
 
         private boolean downloadFromBuildData(JSONObject buildData) throws JSONException {
-            AppHubBuild build = new AppHubBuild(buildData);
+            AppHubBuild build = new AppHubBuild(mApplication.get().getBuildManager(), buildData);
             AppHubBuild latestBuild = getLatestBuild();
             String applicationID = mApplication.get().getApplicationID();
 
@@ -235,7 +276,7 @@ public class AppHubBuildManager {
 
             // Download the build and save it to a path.
             try {
-                File buildDirectory = AppHubPaths.getDirectoryForBuildUid(build.getIdentifier());
+                File buildDirectory = build.getBuildDirectory();
                 File zipFile = AppHubAPI.downloadFile(build.getS3Url(), buildDirectory);
                 if (zipFile == null) {
                     error = new AppHubException(AppHubException.BUILD_DOWNLOAD_FAILURE,

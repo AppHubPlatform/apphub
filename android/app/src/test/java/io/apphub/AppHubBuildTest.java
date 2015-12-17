@@ -18,7 +18,7 @@ public class AppHubBuildTest extends AppHubTest {
 
     @Test
     public void testDefaultBuild() throws Exception {
-        AppHubBuild build = new AppHubBuild();
+        AppHubBuild build = new AppHubBuild(null);
 
         assertEquals("LOCAL_BUILD", build.getIdentifier());
         assertEquals("index.android.bundle", build.getBundleAssetPathWithName("index.android.bundle"));
@@ -28,7 +28,7 @@ public class AppHubBuildTest extends AppHubTest {
     public void testBuildFromMetadata() throws Exception {
         String responseStr = readFile("responses/valid_get_build_response.json");
         JSONObject responseJson = new JSONObject(responseStr);
-        AppHubBuild build = new AppHubBuild(responseJson.getJSONObject("data"));
+        AppHubBuild build = new AppHubBuild(null, responseJson.getJSONObject("data"));
 
         assertEquals(build.getIdentifier(), "ABC");
         assertEquals(build.getName(), "My Build");

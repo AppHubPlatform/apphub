@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class AppHubBuild {
     private final String mDescription;
     private final Date mCreated;
     private final Set<String> mCompatibleVersions;
+    private final WeakReference<AppHubBuildManager> mBuildManager;
 
     public String getIdentifier() {
         return mUid;
@@ -55,12 +57,15 @@ public class AppHubBuild {
         if (getIdentifier().equals(DEFAULT_BUILD_IDENTIFIER)) {
             return assetName;
         } else {
-            return new File(AppHubPaths.getDirectoryForBuildUid(getIdentifier()), assetName)
-                    .getAbsolutePath();
+            return new File(getBuildDirectory(), assetName).getAbsolutePath();
         }
     }
 
-    protected AppHubBuild(JSONObject obj) throws JSONException {
+    protected File getBuildDirectory() {
+        return new File(mBuildManager.get().getRootBuildDirectory(), getIdentifier());
+    }
+
+    protected AppHubBuild(AppHubBuildManager manager, JSONObject obj) throws JSONException {
         mUid = obj.getString("uid");
         mProjectUid = obj.getString("project_uid");
         mS3Url = obj.getString("s3_url");
@@ -68,6 +73,7 @@ public class AppHubBuild {
         mDescription = obj.getString("description");
         mCreated = new Date(obj.getLong("created"));
         mCompatibleVersions = new HashSet<String>();
+        mBuildManager = new WeakReference<AppHubBuildManager>(manager);
 
         Iterator<String> versions = obj.getJSONObject("app_versions").keys();
         while (versions.hasNext()) {
@@ -75,13 +81,14 @@ public class AppHubBuild {
         }
     }
 
-    protected AppHubBuild() {
+    protected AppHubBuild(AppHubBuildManager manager) {
         mUid = DEFAULT_BUILD_IDENTIFIER;
         mProjectUid = null;
         mS3Url = null;
         mName = DEFAULT_BUILD_IDENTIFIER;
         mDescription = "This build was downloaded from the Play Store.";
         mCreated = new Date();
+        mBuildManager = new WeakReference<AppHubBuildManager>(manager);
         mCompatibleVersions = new HashSet<String>(Arrays.asList(new String[]{BuildConfig.VERSION_NAME}));
     }
 }
