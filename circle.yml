@@ -20,3 +20,4 @@ test:
       -project AppHubIntegration/AppHubIntegration.xcodeproj
       -scheme "AppHubIntegration"
       build build-tests run-tests
+    - cd android && ./gradlew test

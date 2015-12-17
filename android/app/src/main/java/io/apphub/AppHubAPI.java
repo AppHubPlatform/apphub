@@ -1,7 +1,7 @@
 package io.apphub;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,7 +14,7 @@ import java.net.URL;
 
 class AppHubAPI {
 
-    protected static JsonObject getBuildData(AppHubApplication application) throws AppHubException {
+    protected static JSONObject getBuildData(AppHubApplication application) throws AppHubException {
         String applicationID = application.getApplicationID();
 
         AppHubLog.d(String.format("Downloading build information for project: %s", applicationID));
@@ -66,7 +66,11 @@ class AppHubAPI {
             }
         }
 
-        return new JsonParser().parse(responseString).getAsJsonObject();
+        try {
+            return new JSONObject(responseString);
+        } catch (JSONException e) {
+            throw new AppHubException(AppHubException.SERVER_FAILURE, e.toString());
+        }
     }
 
     private static final int BUFFER_SIZE = 4096;

@@ -33,7 +33,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../app/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/../../app/build/intermediates/classes/androidTest/debug" />
     <exclude-output />
@@ -71,28 +71,12 @@
       <sourceFolder url="file://$MODULE_DIR$/../../app/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../app/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../app/src/androidTest/rs" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/coverage-instrumented-classes" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/dependency-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/dex" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/dex-cache" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/jacoco" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/javaResources" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/libs" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/lint" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/ndk" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/pre-dexed" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/proguard" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/rs" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/reports" />
-      <excludeFolder url="file://$MODULE_DIR$/../../app/build/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/../../app/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />

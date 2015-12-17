@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by mata on 9 /11/15.
- */
 public class AppHubTest extends AppHubBaseTest {
 
     @Before

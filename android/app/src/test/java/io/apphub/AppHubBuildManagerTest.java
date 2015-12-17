@@ -17,9 +17,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by mata on 9/13/15.
- */
 public class AppHubBuildManagerTest extends AppHubBaseTest {
 
     private AppHubApplication application;
@@ -95,7 +92,7 @@ public class AppHubBuildManagerTest extends AppHubBaseTest {
             @Override
             public void done(AppHubBuild build, AppHubException e) {
                 assertEquals(500, e.getCode());
-                assertTrue(e.getMessage().contains("Invalid server response"));
+                assertTrue(e.getMessage().contains("cannot be converted to JSONObject"));
                 signal.countDown();
             }
         });
@@ -233,13 +230,13 @@ public class AppHubBuildManagerTest extends AppHubBaseTest {
                 .willReturn(aResponse().withStatus(200).withBody(responseStr)));
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
-        prefs.edit().putString(manager.mSharedPreferencesLatestBuildIdKey, "foo").apply();
+        prefs.edit().putString(manager.mSharedPreferencesLatestBuildJsonKey, "foo").apply();
 
         manager.fetchBuild(new FetchBuildCallback() {
             @Override
             public void done(AppHubBuild build, AppHubException e) {
-                assertEquals("LOCAL", build.getIdentifier());
-                assertEquals("LOCAL", manager.getLatestBuild().getIdentifier());
+                assertEquals("LOCAL_BUILD", build.getIdentifier());
+                assertEquals("LOCAL_BUILD", manager.getLatestBuild().getIdentifier());
                 assertEquals(build.getBundleAssetPathWithName("index.android.bundle"),
                         "index.android.bundle");
 
@@ -281,4 +278,6 @@ public class AppHubBuildManagerTest extends AppHubBaseTest {
 
         assertTrue(signal.await(2, TimeUnit.SECONDS));
     }
+
+
 }

@@ -60,6 +60,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
+<<<<<<< HEAD
       <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
@@ -68,31 +69,37 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
+||||||| merged common ancestors
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
+=======
+      <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
+>>>>>>> Fix tests
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/coverage-instrumented-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/libs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/ndk" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/proguard" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/sourceFolderJavaResources" />
       <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" exported="" scope="TEST" name="maven-ant-tasks-2.1.3" level="project" />
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="ant-1.8.0" level="project" />
@@ -138,5 +145,53 @@
     <orderEntry type="library" exported="" scope="TEST" name="servlet-api-2.5-20081211" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="json-20090211" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="robolectric-3.0" level="project" />
+||||||| merged common ancestors
+    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
+=======
+    <orderEntry type="library" exported="" scope="TEST" name="jetty-util-6.1.26" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="jackson-databind-2.4.2" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="jackson-core-2.4.2" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="asm-5.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="robolectric-utils-3.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="commons-lang-2.6" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="jsonassert-1.2.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="log4j-1.2.16" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="guava-18.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="objenesis-2.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="xmlunit-1.5" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="httpclient-4.3.5" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="ant-1.8.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="json-path-0.8.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="wiremock-1.51-standalone" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="accessibility-test-framework-1.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="log4j-core-2.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="bcprov-jdk16-1.46" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="mockito-core-1.10.19" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="jackson-annotations-2.4.2" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="maven-ant-tasks-2.1.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="sqlite4java-0.282" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="commons-logging-1.1.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="robolectric-resources-3.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="robolectric-annotations-3.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="shadows-core-3.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="commons-codec-1.6" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="json-20090211" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="vtd-xml-2.11" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="asm-commons-5.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="asm-tree-5.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="asm-analysis-5.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="servlet-api-2.5-20081211" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="jetty-6.1.26" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="icu4j-53.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="log4j-api-2.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="httpcore-4.3.2" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="ant-launcher-1.8.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="robolectric-3.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="asm-util-5.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="json-smart-1.1.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="jopt-simple-4.7" level="project" />
+>>>>>>> Fix tests
   </component>
 </module>

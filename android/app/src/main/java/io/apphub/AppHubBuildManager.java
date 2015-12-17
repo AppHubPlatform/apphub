@@ -7,9 +7,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -34,17 +34,17 @@ public class AppHubBuildManager {
     private final WeakReference<AppHubApplication> mApplication;
 
     // Protected to expose for testing.
-    protected final String mSharedPreferencesLatestBuildIdKey;
+    protected final String mSharedPreferencesLatestBuildJsonKey;
 
-    private final List<AppHubNewBuildListener> mNewBuildListeners = new ArrayList<>();
+    private final List<AppHubNewBuildListener> mNewBuildListeners = new ArrayList<AppHubNewBuildListener>();
 
     private Boolean mDebugBuildsEnabled = false;
     private Boolean mAutomaticPollingEnabled = true;
     private Boolean mCellularDownloadsEnabled = false;
 
     protected AppHubBuildManager(AppHubApplication application) {
-        mApplication = new WeakReference<>(application);
-        mSharedPreferencesLatestBuildIdKey = "__APPHUB__/" + application.getApplicationID() + "/LATEST_BUILD_ID";
+        mApplication = new WeakReference<AppHubApplication>(application);
+        mSharedPreferencesLatestBuildJsonKey = "__APPHUB__/" + application.getApplicationID() + "/LATEST_BUILD_JSON";
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -56,18 +56,16 @@ public class AppHubBuildManager {
 
     public AppHubBuild getLatestBuild() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
-        String latestBuildId = prefs.getString(mSharedPreferencesLatestBuildIdKey, null);
+        String latestBuildJson = prefs.getString(mSharedPreferencesLatestBuildJsonKey, null);
 
-        AppHubBuild.AppHubBuildInstanceCreator creator = new AppHubBuild.AppHubBuildInstanceCreator()
-                .identifier(latestBuildId);
-
-        if (latestBuildId == null) {
-            return creator.createDefaultBuildInstance();
+        if (latestBuildJson == null) {
+            return new AppHubBuild();
         } else {
             try {
-                return creator.createInstanceFromMetadata();
-            } catch (AppHubException e) {
-                return creator.createDefaultBuildInstance();
+                return new AppHubBuild(new JSONObject(latestBuildJson));
+            } catch (JSONException e) {
+                AppHubLog.e("Failed to create build.", e);
+                return new AppHubBuild();
             }
         }
     }
@@ -101,7 +99,7 @@ public class AppHubBuildManager {
 
     // Protected for testing.
     protected FetchBuildTask mRunningTask;
-    private List<FetchBuildCallback> mFetchBuildCallbacks = new ArrayList<>();
+    private List<FetchBuildCallback> mFetchBuildCallbacks = new ArrayList<FetchBuildCallback>();
 
     private void pollForBuilds() {
         ConnectivityManager connManager = (ConnectivityManager) AppHub.getContext()
@@ -163,35 +161,6 @@ public class AppHubBuildManager {
         private static final String BUILD_DATA_GET_BUILD_TYPE = "GET-BUILD";
         private static final String BUILD_DATA_NO_BUILD_TYPE = "NO-BUILD";
 
-        private class BuildInfo {
-            private String uid;
-            private String name;
-            private String description;
-            private String created;
-            private String s3_url;
-            private String project_uid;
-            private JsonObject app_versions;
-
-            protected BuildInfo() {
-                // no-args constructor
-            }
-
-            protected List<String> getAppVersions() {
-                List<String> appVersions = new ArrayList<>(app_versions.entrySet().size());
-
-                for (Map.Entry<String,JsonElement> version : app_versions.entrySet()) {
-                    appVersions.add(version.getValue().getAsString());
-                }
-
-                return appVersions;
-            }
-
-            protected String[] getAppVersionsArray() {
-                List<String> appVersions = getAppVersions();
-                return appVersions.toArray(new String[appVersions.size()]);
-            }
-        }
-
         private boolean unpackZip(File buildDirectory, File zipFile) throws AppHubException {
             ZipInputStream zis = null;
             try {
@@ -237,40 +206,41 @@ public class AppHubBuildManager {
             return true;
         }
 
-        private boolean downloadFromBuildInfo(BuildInfo buildInfo) {
+        private boolean downloadFromBuildData(JSONObject buildData) throws JSONException {
+            AppHubBuild build = new AppHubBuild(buildData);
             AppHubBuild latestBuild = getLatestBuild();
             String applicationID = mApplication.get().getApplicationID();
 
             // Do not download if the new build matches our current build.
-            if (latestBuild.getIdentifier().equals(buildInfo.uid)) {
-                AppHubLog.d(String.format("Already downloaded build with ID: %s", buildInfo.uid));
+            if (latestBuild.getIdentifier().equals(build.getIdentifier())) {
+                AppHubLog.d(String.format("Already downloaded build with ID: %s", build.getIdentifier()));
                 return true;
             }
 
             // Ensure that application ids match.
-            if (! buildInfo.project_uid.equals(applicationID)) {
+            if (! build.getProjectIdentifier().equals(applicationID)) {
                 error = new AppHubException(AppHubException.SERVER_FAILURE,
                         String.format("Build contains application ID: '%s', which differs from expected '%s",
-                                buildInfo.project_uid, applicationID));
+                                build.getProjectIdentifier(), applicationID));
                 return false;
             }
 
             // Ensure that the application is compatible with this version of the app.
-            if (! buildInfo.getAppVersions().contains(AppHubUtils.getApplicationVersion())) {
+            if (! build.getCompatibleVersions().contains(AppHubUtils.getApplicationVersion())) {
                 error = new AppHubException(AppHubException.SERVER_FAILURE,
                         String.format("Current version of app: '%s', is not contain in versions " +
-                                        "in downloaded build: '%s", buildInfo.project_uid, applicationID));
+                                        "in downloaded build: '%s", build.getProjectIdentifier(), applicationID));
                 return false;
             }
 
             // Download the build and save it to a path.
             try {
-                File buildDirectory = AppHubPaths.getDirectoryForBuildUid(buildInfo.uid);
-                File zipFile = AppHubAPI.downloadFile(buildInfo.s3_url, buildDirectory);
+                File buildDirectory = AppHubPaths.getDirectoryForBuildUid(build.getIdentifier());
+                File zipFile = AppHubAPI.downloadFile(build.getS3Url(), buildDirectory);
                 if (zipFile == null) {
                     error = new AppHubException(AppHubException.BUILD_DOWNLOAD_FAILURE,
                             String.format("Failed to download build from url %s to %s",
-                                    buildInfo.s3_url, buildDirectory.getPath()));
+                                    build.getS3Url(), buildDirectory.getPath()));
                 }
 
                 boolean success = unpackZip(buildDirectory, zipFile);
@@ -289,64 +259,57 @@ public class AppHubBuildManager {
 
         @Override
         protected Boolean doInBackground(FetchBuildCallback ... params) {
-            callback = params[0];
-
-            JsonObject object;
             try {
-                object = AppHubAPI.getBuildData(mApplication.get());
-            } catch (AppHubException e) {
-                error = e;
-                return false;
-            } catch (IllegalStateException e) {
-                error = new AppHubException(AppHubException.SERVER_FAILURE,
-                        "Invalid server response: " + e.toString());
-                return false;
-            }
+                callback = params[0];
 
-            String status = object.get(SERVER_RESPONSE_STATUS_KEY).getAsString();
-
-            if (! status.equals(SERVER_RESPONSE_SUCCESS_TYPE)) {
-                error = new AppHubException(AppHubException.INVALID_STATUS,
-                            String.format("Invalid status: %s", status));
-                return false;
-            }
-
-            JsonObject buildData = object.getAsJsonObject(SERVER_RESPONSE_BUILD_DATA_KEY);
-            String buildDataType = buildData.getAsJsonPrimitive(BUILD_DATA_TYPE_KEY).getAsString();
-
-            switch (buildDataType) {
-                case BUILD_DATA_GET_BUILD_TYPE:
-                    BuildInfo buildInfo = new Gson().fromJson(buildData, BuildInfo.class);
-                    boolean success = downloadFromBuildInfo(buildInfo);
-                    if (success) {
-                        AppHubBuild build = new AppHubBuild.AppHubBuildInstanceCreator()
-                                .identifier(buildInfo.uid)
-                                .name(buildInfo.name)
-                                .compatibleVersions(buildInfo.getAppVersionsArray())
-                                .creationDate(new Date(Long.parseLong(buildInfo.created)))
-                                .description(buildInfo.description)
-                                .createInstance();
-                        success = build.saveBuildMetadata();
-                    }
-
-                    if (success) {
-                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
-                        success = prefs.edit().putString(mSharedPreferencesLatestBuildIdKey, buildInfo.uid).commit();
-                    }
-
-                    return success;
-
-                case BUILD_DATA_NO_BUILD_TYPE:
-                    // Clear the old build information. We will clean the build directory
-                    // only at startup.
-
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
-                    return prefs.edit().remove(mSharedPreferencesLatestBuildIdKey).commit();
-
-                default:
-                    error = new AppHubException(AppHubException.OTHER_CAUSE,
-                            String.format("Invalid build type: %s", buildDataType));
+                JSONObject object;
+                try {
+                    object = AppHubAPI.getBuildData(mApplication.get());
+                } catch (AppHubException e) {
+                    error = e;
                     return false;
+                } catch (IllegalStateException e) {
+                    error = new AppHubException(AppHubException.SERVER_FAILURE,
+                            "Invalid server response: " + e.toString());
+                    return false;
+                }
+
+                String status = object.getString(SERVER_RESPONSE_STATUS_KEY);
+
+                if (! status.equals(SERVER_RESPONSE_SUCCESS_TYPE)) {
+                    error = new AppHubException(AppHubException.INVALID_STATUS,
+                            String.format("Invalid status: %s", status));
+                    return false;
+                }
+
+                JSONObject buildData = object.getJSONObject(SERVER_RESPONSE_BUILD_DATA_KEY);
+                String buildDataType = buildData.getString(BUILD_DATA_TYPE_KEY);
+
+                switch (buildDataType) {
+                    case BUILD_DATA_GET_BUILD_TYPE:
+                        boolean success = downloadFromBuildData(buildData);
+                        if (success) {
+                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
+                            success = prefs.edit().putString(mSharedPreferencesLatestBuildJsonKey, buildData.toString()).commit();
+                        }
+
+                        return success;
+
+                    case BUILD_DATA_NO_BUILD_TYPE:
+                        // Clear the old build information. We will clean the build directory
+                        // only at startup.
+
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
+                        return prefs.edit().remove(mSharedPreferencesLatestBuildJsonKey).commit();
+
+                    default:
+                        error = new AppHubException(AppHubException.OTHER_CAUSE,
+                                String.format("Invalid build type: %s", buildDataType));
+                        return false;
+                }
+            } catch (JSONException e) {
+                AppHubLog.e("Failed to parse JSON of build.", e);
+                return false;
             }
         }
 
