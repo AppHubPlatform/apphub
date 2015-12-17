@@ -13,7 +13,6 @@
 #import "AHFileSystem.h"
 #import "AHBuildManager.h"
 #import "AHBuildManager+Private.h"
-#import "AHBuildsListViewController.h"
 #import "AHConstants.h"
 #import "AHReachability.h"
 
@@ -60,27 +59,6 @@
 
 + (AHLogLevel)logLevel {
     return [AppHub sharedManager].logLevel;
-}
-
-+ (void)presentSelectorOnViewController:(UIViewController *)viewController
-                       withBuildHandler:(AHBuildResultBlock)block;
-{
-    // Clear all the builds so that we don't incorrectly cache something.
-    AHClearAllBuilds();
-    
-    AHBuildResultBlock completion = ^(AHBuild *build, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [viewController dismissViewControllerAnimated:NO completion:^{
-                block(build, error);
-            }];
-        });
-    };
-    
-    AHBuildsListViewController *listViewController = [[AHBuildsListViewController alloc] initWithBuildsResultsHandler:completion];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [viewController presentViewController:listViewController animated:NO completion:nil];
-    });
 }
 
 + (NSString *)SDKVersion

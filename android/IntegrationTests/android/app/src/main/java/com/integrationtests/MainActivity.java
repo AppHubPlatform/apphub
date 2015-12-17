@@ -11,8 +11,7 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
-import io.apphub.AppHub;
-import io.apphub.AppHubApplication;
+import io.apphub.*;
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
@@ -22,14 +21,25 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppHubApplication application = new AppHubApplication("123");
+
+        AppHub.initialize(this);
+        AppHub.setLogLevel(AppHubLogLevel.DEBUG);
+
+        AppHubApplication application = new AppHubApplication("gled42aSkRpNkHbZYpqq");
+
         String bundleAssetPath = application.getBuildManager().getLatestBuild().
-                getBundleAssetPathWithName("main.jsbundle");
+                getBundleAssetPathWithName("index.android.bundle");
+        application.getBuildManager().addNewBuildListener(new AppHubNewBuildListener() {
+            @Override
+            public void onNewBuild(AppHubBuild build) {
+                System.out.println("NEW BUILD!!!");
+            }
+        });
         mReactRootView = new ReactRootView(this);
 
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
-                .setBundleAssetName("index.android.bundle")
+                .setJSBundleFile(bundleAssetPath)
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)

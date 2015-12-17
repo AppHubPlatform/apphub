@@ -15,9 +15,9 @@ import java.net.URL;
 class AppHubAPI {
 
     protected static JSONObject getBuildData(AppHubApplication application) throws AppHubException {
+        AppHubLog.d(String.format("Downloading build information for project: %s",
+                application.getApplicationID()));
         String applicationID = application.getApplicationID();
-
-        AppHubLog.d(String.format("Downloading build information for project: %s", applicationID));
 
         HttpURLConnection urlConnection = null;
         String responseString = "";

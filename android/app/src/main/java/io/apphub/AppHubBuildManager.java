@@ -28,7 +28,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class AppHubBuildManager {
-    private final WeakReference<AppHubApplication> mApplication;
+    private final AppHubApplication mApplication;
 
     // Protected to expose for testing.
     protected final String mSharedPreferencesLatestBuildJsonKey;
@@ -40,7 +40,7 @@ public class AppHubBuildManager {
     private Boolean mCellularDownloadsEnabled = false;
 
     protected AppHubBuildManager(AppHubApplication application) {
-        mApplication = new WeakReference<AppHubApplication>(application);
+        mApplication = application;
         mSharedPreferencesLatestBuildJsonKey = "__APPHUB__/" +
                 application.getApplicationID() + "/LATEST_BUILD_JSON";
 
@@ -58,7 +58,7 @@ public class AppHubBuildManager {
 
     protected File getRootBuildDirectory() {
         File rootDirectory = new File(AppHub.getContext().getFilesDir(), ROOT_DIR_NAME);
-        return new File(rootDirectory, mApplication.get().getApplicationID());
+        return new File(rootDirectory, mApplication.getApplicationID());
     }
 
     protected void cleanBuilds() {
@@ -237,9 +237,10 @@ public class AppHubBuildManager {
         }
 
         private boolean downloadFromBuildData(JSONObject buildData) throws JSONException {
-            AppHubBuild build = new AppHubBuild(mApplication.get().getBuildManager(), buildData);
+            AppHubLog.d("Downloading from buildData: " + buildData.toString());
+            AppHubBuild build = new AppHubBuild(mApplication.getBuildManager(), buildData);
             AppHubBuild latestBuild = getLatestBuild();
-            String applicationID = mApplication.get().getApplicationID();
+            String applicationID = mApplication.getApplicationID();
 
             // Do not download if the new build matches our current build.
             if (latestBuild.getIdentifier().equals(build.getIdentifier())) {
@@ -291,6 +292,7 @@ public class AppHubBuildManager {
             return true;
         }
 
+        // Return whether we have a new build.
         @Override
         protected Boolean doInBackground(FetchBuildCallback ... params) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
@@ -300,7 +302,7 @@ public class AppHubBuildManager {
 
                 JSONObject object;
                 try {
-                    object = AppHubAPI.getBuildData(mApplication.get());
+                    object = AppHubAPI.getBuildData(mApplication);
                 } catch (AppHubException e) {
                     error = e;
                     return false;
@@ -334,7 +336,8 @@ public class AppHubBuildManager {
                     case BUILD_DATA_NO_BUILD_TYPE:
                         // Clear the old build information. We will clean the build directory
                         // only at startup.
-                        return prefs.edit().remove(mSharedPreferencesLatestBuildJsonKey).commit();
+                        prefs.edit().remove(mSharedPreferencesLatestBuildJsonKey).commit();
+                        return false;
 
                     default:
                         error = new AppHubException(AppHubException.OTHER_CAUSE,
@@ -348,20 +351,20 @@ public class AppHubBuildManager {
         }
 
         @Override
-        protected void onPostExecute(Boolean didSucceed) {
-            if (didSucceed) {
-                AppHubBuild newBuild = getLatestBuild();
-                for (AppHubNewBuildListener listener : mNewBuildListeners) {
-                    listener.onNewBuild(newBuild);
+        protected void onPostExecute(Boolean didDownloadNewBuild) {
+            if (error == null) {
+                if (didDownloadNewBuild) {
+                    AppHubBuild newBuild = getLatestBuild();
+                    for (AppHubNewBuildListener listener : mNewBuildListeners) {
+                        listener.onNewBuild(newBuild);
+                    }
+
+                    callback.done(newBuild, null);
+                } else {
+                    callback.done(null, null);
                 }
-
-                callback.done(newBuild, null);
-
             } else {
-                if (error == null) {
-                    error = new AppHubException(AppHubException.OTHER_CAUSE, "Unknown AppHub error.");
-                }
-
+                AppHubLog.e("Error downloading build:", error);
                 callback.done(null, error);
             }
         }

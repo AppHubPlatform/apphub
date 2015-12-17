@@ -1,5 +1,5 @@
 package io.apphub;
 
-interface AppHubNewBuildListener {
+public interface AppHubNewBuildListener {
     void onNewBuild(AppHubBuild build);
 }

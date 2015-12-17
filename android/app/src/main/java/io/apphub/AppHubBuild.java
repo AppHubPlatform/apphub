@@ -21,7 +21,7 @@ public class AppHubBuild {
     private final String mDescription;
     private final Date mCreated;
     private final Set<String> mCompatibleVersions;
-    private final WeakReference<AppHubBuildManager> mBuildManager;
+    private final AppHubBuildManager mBuildManager;
 
     public String getIdentifier() {
         return mUid;
@@ -59,7 +59,7 @@ public class AppHubBuild {
     }
 
     protected File getBuildDirectory() {
-        return new File(mBuildManager.get().getRootBuildDirectory(), getIdentifier());
+        return new File(mBuildManager.getRootBuildDirectory(), getIdentifier());
     }
 
     protected AppHubBuild(AppHubBuildManager manager, JSONObject obj) throws JSONException {
@@ -70,7 +70,7 @@ public class AppHubBuild {
         mDescription = obj.getString("description");
         mCreated = new Date(obj.getLong("created"));
         mCompatibleVersions = new HashSet<String>();
-        mBuildManager = new WeakReference<AppHubBuildManager>(manager);
+        mBuildManager = manager;
 
         Iterator<String> versions = obj.getJSONObject("app_versions").keys();
         while (versions.hasNext()) {
@@ -85,7 +85,7 @@ public class AppHubBuild {
         mName = DEFAULT_BUILD_IDENTIFIER;
         mDescription = "This build was downloaded from the Play Store.";
         mCreated = new Date();
-        mBuildManager = new WeakReference<AppHubBuildManager>(manager);
+        mBuildManager = manager;
         mCompatibleVersions = new HashSet<String>(Arrays.asList(new String[]{BuildConfig.VERSION_NAME}));
     }
 }

@@ -47,32 +47,4 @@
 /// The version of the installed SDK.
 + (NSString *)SDKVersion;
 
-///---------------------
-/// @name Testing Builds
-///---------------------
-
-/**
-Present a view that allows you to select between all available builds of your application.
-
-The resulting block will be invoked on the main thread, so you can present a view from the completion block.
-
- 
-Example:
- 
-    [[AppHub buildManager] presentSelectorWithBuildHandler:^(AHBuild *build, NSError *error) {
-        if (error || ! build) {
-            // An error occurred.
-        } else {
-            NSURL *jsCodeLocation = [build.bundle URLForResource:@"main" withExtension:@"jsbundle"];
-            // ... do something with the jsbundle, like presenting an RCTRootView
-        }
-     }];
- 
-@param viewController The view controller on which a build selector table will be presented.
-@param block An AHBuildResultBlock that will be invoked upon selection of a build.
- 
- */
-+ (void)presentSelectorOnViewController:(UIViewController *)viewController
-                       withBuildHandler:(AHBuildResultBlock)block;
-
 @end
