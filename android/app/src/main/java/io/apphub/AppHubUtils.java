@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import java.io.File;
+
 /**
  * Created by mata on 9/20/15.
  */
@@ -23,4 +25,13 @@ class AppHubUtils {
         return info.versionName;
     }
 
+    protected static void deleteRecursively(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory()) {
+            for (File child : fileOrDirectory.listFiles()) {
+                deleteRecursively(child);
+            }
+        }
+
+        fileOrDirectory.delete();
+    }
 }

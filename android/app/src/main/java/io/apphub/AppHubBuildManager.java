@@ -27,9 +27,6 @@ import java.util.TimerTask;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-/**
- * Created by mata on 9/13/15.
- */
 public class AppHubBuildManager {
     private final WeakReference<AppHubApplication> mApplication;
 
@@ -63,16 +60,6 @@ public class AppHubBuildManager {
         return new File(rootDirectory, mApplication.get().getApplicationID());
     }
 
-    private void deleteRecursive(File fileOrDirectory) {
-        if (fileOrDirectory.isDirectory()) {
-            for (File child : fileOrDirectory.listFiles()) {
-                deleteRecursive(child);
-            }
-        }
-
-        fileOrDirectory.delete();
-    }
-
     protected void cleanBuilds() {
         AppHubBuild latestBuild = getLatestBuild();
 
@@ -90,7 +77,7 @@ public class AppHubBuildManager {
 
         for (File f : buildDirectories) {
             if (! f.equals(getLatestBuild().getBuildDirectory())) {
-                deleteRecursive(f);
+                AppHubUtils.deleteRecursively(f);
             }
         }
     }
