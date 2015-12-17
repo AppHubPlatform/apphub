@@ -44,6 +44,7 @@ var argv = require('yargs')
       '--dev', argv.dev,
       '--bundle-output', path.join(buildDir, argv.outputFile),
       '--assets-dest', buildDir,
+      '--platform', 'ios',
     ];
 
     var cmds = [
