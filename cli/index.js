@@ -29,6 +29,10 @@ var argv = require('yargs')
         default: false,
         description: 'If false, warnings are disabled and the bundle is minified'
       })
+      .option('platform',  {
+        default: 'ios',
+        description: 'Either "ios" or "android"'
+      })
       .help('help')
       .argv
 
@@ -44,6 +48,7 @@ var argv = require('yargs')
       '--dev', argv.dev,
       '--bundle-output', path.join(buildDir, argv.outputFile),
       '--assets-dest', buildDir,
+      '--platform', argv.platform,
     ];
 
     var cmds = [
