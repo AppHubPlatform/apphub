@@ -59,7 +59,7 @@ public class AppHubBuild {
     }
 
     protected File getBuildDirectory() {
-        return new File(mBuildManager.getRootBuildDirectory(), getIdentifier());
+        return new File(mBuildManager.getRootBuildDirectory(), "build/" + getIdentifier());
     }
 
     protected AppHubBuild(AppHubBuildManager manager, JSONObject obj) throws JSONException {
@@ -72,9 +72,10 @@ public class AppHubBuild {
         mCompatibleVersions = new HashSet<String>();
         mBuildManager = manager;
 
-        Iterator<String> versions = obj.getJSONObject("app_versions").keys();
-        while (versions.hasNext()) {
-            mCompatibleVersions.add(versions.next());
+        JSONObject versions = obj.getJSONObject("app_versions");
+        Iterator<String> versionKeys = versions.keys();
+        while (versionKeys.hasNext()) {
+            mCompatibleVersions.add(versions.getString(versionKeys.next()));
         }
     }
 

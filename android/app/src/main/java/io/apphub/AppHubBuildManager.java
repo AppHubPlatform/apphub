@@ -58,7 +58,7 @@ public class AppHubBuildManager {
 
     protected File getRootBuildDirectory() {
         File rootDirectory = new File(AppHub.getContext().getFilesDir(), ROOT_DIR_NAME);
-        return new File(rootDirectory, mApplication.getApplicationID());
+        return new File(rootDirectory, "application/" + mApplication.getApplicationID());
     }
 
     protected void cleanBuilds() {
@@ -201,6 +201,7 @@ public class AppHubBuildManager {
                 int count;
 
                 ZipEntry ze;
+
                 while ((ze = zis.getNextEntry()) != null) {
                     filename = ze.getName();
 
