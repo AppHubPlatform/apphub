@@ -182,7 +182,7 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
     NSString *appVersion = [self installedAppVersion];
     
 #if TARGET_IPHONE_SIMULATOR
-    NSString *deviceID = [NSBundle mainBundle].bundlePath;
+    NSString *deviceID = @"SIMULATOR";
 #else
     NSString *deviceID = [UIDevice currentDevice].identifierForVendor.UUIDString;
 #endif
