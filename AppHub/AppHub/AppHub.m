@@ -17,6 +17,9 @@
 #import "AHConstants.h"
 #import "AHReachability.h"
 
+// NSString *const AHEndpoint = @"http://apphub-staging.herokuapp.com/v1";
+NSString *const AHEndpoint = @"https://api.apphub.io/v1";
+
 @implementation AppHub
 
 + (AppHub *)sharedManager
@@ -34,6 +37,7 @@
 {
     if ((self = [super init])) {
         self.logLevel = AHLogLevelError;
+        self.rootURL = AHEndpoint;
         
         self.reachability = [AHReachability reachabilityWithHostname:@"www.google.com"];
         [self.reachability startNotifier];
@@ -52,6 +56,14 @@
 
 + (NSString *)applicationID {
     return [AppHub sharedManager].applicationID;
+}
+
++ (void)setRootURL:(NSString *)rootURL {
+    [AppHub sharedManager].rootURL = rootURL;
+}
+
++ (NSString *)rootURL {
+    return [AppHub sharedManager].rootURL;
 }
 
 + (void)setLogLevel:(AHLogLevel)logLevel {

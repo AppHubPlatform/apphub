@@ -37,6 +37,14 @@
 /// @return The applicationID used to configure the AppHub framework.
 + (NSString *)applicationID;
 
+/// The host server from where build metadata is fetched.
+/// Defaults to the AppHub Dashboard.
+/// @param rootURL The host server from where build metadata is fetched.
++ (void)setRootURL:(NSString *)rootURL;
+
+/// @return The host server from where build metadata is fetched.
++ (NSString *)rootURL;
+
 /// The level of logging that will be displayed to the Xcode console.
 /// @param logLevel The level of logging that will be displayed to the Xcode console.
 + (void)setLogLevel:(AHLogLevel)logLevel;

@@ -198,7 +198,15 @@
 }
 
 -(void) testApiUrl {
-    XCTAssertTrue([AHEndpoint isEqualToString:@"https://api.apphub.io/v1"]);
+    XCTAssertTrue([[AppHub rootURL] isEqualToString:@"https://api.apphub.io/v1"]);
+}
+
+-(void) testSetApiUrl {
+    NSString *rootURL = [AppHub rootURL];
+    [AppHub setRootURL:@"foo"];
+    XCTAssertEqualObjects([AppHub rootURL], @"foo");
+    [AppHub setRootURL:rootURL];
+    XCTAssertEqualObjects([AppHub rootURL], rootURL);
 }
 
 -(void) testNoBuildShouldGiveDefaultBundle {
