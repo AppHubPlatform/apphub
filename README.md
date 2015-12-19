@@ -29,7 +29,7 @@ Once you sign up, the dashboard will walk you through incorporating the AppHub S
 
 Some developers wish to configure their own backend to host and serve builds to mobile clients. This is an advanced feature; most developers choose to use AppHub hosting and the AppHub developer dashboard.
 
-We are working on making this process easier. In the meantime, we'd love to take PRs for improved documentation and hosting support!
+See the [AppHub docs](http://docs.apphub.io/v1.0/docs/self-hosting) for full documentation on self-hosting.
 
 ## Developer Resources
 
