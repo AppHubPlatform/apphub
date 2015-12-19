@@ -187,7 +187,7 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
     NSString *deviceID = [UIDevice currentDevice].identifierForVendor.UUIDString;
 #endif
     
-    NSString *getBuildRequestString = [NSString stringWithFormat:@"%@/projects/%@/build?sdk_version=%@&app_version=%@&device_uid=%@&debug=%d", AHEndpoint, [AppHub applicationID], AHSDKVersion, appVersion, deviceID, _debugBuildsEnabled];
+    NSString *getBuildRequestString = [NSString stringWithFormat:@"%@/projects/%@/build?sdk_version=%@&app_version=%@&device_uid=%@&debug=%d", [AppHub rootURL], [AppHub applicationID], AHSDKVersion, appVersion, deviceID, _debugBuildsEnabled];
 
     AHLog(AHLogLevelDebug, @"Downloading build information from URL: %@", getBuildRequestString);
 

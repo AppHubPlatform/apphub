@@ -41,7 +41,7 @@
 - (void)fetchBuilds
 {
     NSString *applicationID = [AppHub applicationID];
-    NSString *requestString = [NSString stringWithFormat:@"%@/projects/%@/list-builds?sdk_version=%@", AHEndpoint, applicationID, [AppHub SDKVersion]];
+    NSString *requestString = [NSString stringWithFormat:@"%@/projects/%@/list-builds?sdk_version=%@", [AppHub rootURL], applicationID, [AppHub SDKVersion]];
     NSURL *requestURL = [NSURL URLWithString:requestString];
 
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData *data, NSURLResponse *response, NSError * error) {

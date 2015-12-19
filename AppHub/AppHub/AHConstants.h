@@ -31,7 +31,6 @@ extern NSString *const AHBuildDirectoryName;
 extern NSString *const AHCurrentBuildInfoName;
 
 extern NSString *const AHDirectoryName;
-extern NSString *const AHEndpoint;
 extern NSString *const AHIOSBundleName;
 extern NSString *const AHNewBuildEvent;
 extern NSString *const AHSDKVersion;

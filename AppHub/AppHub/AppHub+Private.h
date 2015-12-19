@@ -18,6 +18,8 @@
 // The applicationID used to configure the AppHub framework.
 @property (nonatomic, copy) NSString *applicationID;
 
+@property (nonatomic, copy) NSString *rootURL;
+
 // The level of logging that will be displayed to the Xcode console.
 @property (nonatomic, assign) AHLogLevel logLevel;
 
