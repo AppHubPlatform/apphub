@@ -94,7 +94,7 @@ static XCTestExpectation *_newBuildExpectation;
 
 -(void) testNewBuildJavaScript {
   [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
-  [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.14/hello-world-asset-image.zip"];
+  [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.17/hello-world-with-images.zip"];
   
   XCTestExpectation *testExpection = [self expectationWithDescription:@"Expect new JS code"];
   
@@ -115,7 +115,7 @@ static XCTestExpectation *_newBuildExpectation;
         }
       }];
       
-      XCTAssertTrue(foundElement, @"Couldn't find element with UIImageView in %d seconds", TIMEOUT_SECONDS);
+      XCTAssertTrue(foundElement, @"Couldn't find element with Text in %d seconds", TIMEOUT_SECONDS);
       [testExpection fulfill];
     });
     
@@ -126,7 +126,7 @@ static XCTestExpectation *_newBuildExpectation;
 
 -(void) testNewBuildImage {
   [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
-  [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.14/hello-world-asset-image.zip"];
+  [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.17/hello-world-with-images.zip"];
   
   XCTestExpectation *testExpection = [self expectationWithDescription:@"Expect new JS image"];
   

@@ -4,6 +4,13 @@ var execSync = require('child_process').execSync;
 var path = require('path');
 var uuid = require('node-uuid');
 var mkdirp = require('mkdirp');
+var plist = require('plist');
+var fs = require('fs');
+
+var MANIFEST_VERSION = 'pre1';
+var MANIFEST_FILE_NAME = 'rn-bundle-manifest.json';
+var PLIST_VERSION_KEY = 'CFBundleShortVersionString';
+var IOS_BUILD_PATH = 'ios.bundle';
 
 var argv = require('yargs')
   .usage('apphub <command>')
@@ -29,33 +36,53 @@ var argv = require('yargs')
         default: false,
         description: 'If false, warnings are disabled and the bundle is minified'
       })
-      .option('platform',  {
-        default: 'ios',
-        description: 'Either "ios" or "android"'
-      })
       .help('help')
       .argv
 
     var plistFile = argv.plistFile ||
       path.join('ios', require(path.join(process.cwd(), 'package.json')).name, 'Info.plist');
+    var plistObj = plist.parse(fs.readFileSync(plistFile, 'utf8'));
+    var iosVersion = plistObj[PLIST_VERSION_KEY];
+    if (! iosVersion) {
+      console.log('Could not read iOS version from plist: ' + plistFile);
+      console.log('Specify a plist location with --plist-file <path/to/file>');
+      process.exit(0);
+    }
+
     var outputZip = path.join(process.cwd(), argv.outputZip);
-    var tmpDir = '/tmp/apphub/' + uuid.v4();
-    var buildDir = tmpDir + '/build';
-    mkdirp.sync(buildDir);
+    var tmpDir = path.join('tmp', 'apphub', uuid.v4());
+
+    var buildDir = path.join(tmpDir, 'build');
+    var iosBuildDir = path.join(buildDir, IOS_BUILD_PATH);
+    mkdirp.sync(iosBuildDir);
 
     var options = [
       '--entry-file', argv.entryFile,
       '--dev', argv.dev,
-      '--bundle-output', path.join(buildDir, argv.outputFile),
-      '--assets-dest', buildDir,
-      '--platform', argv.platform,
+      '--bundle-output', path.join(iosBuildDir, argv.outputFile),
+      '--assets-dest', iosBuildDir,
+      '--platform', 'ios',
     ];
+
+    var manifest = {
+      manifestVersion: MANIFEST_VERSION,
+      bundles: {
+        ios: {
+          path: IOS_BUILD_PATH,
+          binaryVersion: iosVersion,
+        },
+      }
+    };
+
+    fs.writeFileSync(path.join(buildDir, MANIFEST_FILE_NAME),
+                     JSON.stringify(manifest, null, 2),
+                     'utf-8');
 
     var cmds = [
       'react-native bundle ' + options.join(' '),
-      'cp ' + plistFile + ' ' + buildDir,
       'cd ' + tmpDir + ' && zip -r ' + outputZip + ' build/',
     ];
+
     for (var i = 0; i < cmds.length; i++) {
       var cmd = cmds[i];
       console.log(cmd);

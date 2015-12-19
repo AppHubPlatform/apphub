@@ -27,36 +27,33 @@ RCT_EXPORT_METHOD(newBuildFound:(NSDictionary *)build) {
   AHBuildManager *manager = [AppHub buildManager];
   
   [AppHub setApplicationID:@"123"];
+  [AppHub setLogLevel:AHLogLevelDebug];
+  
   manager.automaticPollingEnabled = NO;
   
   [AppHubTestUtils clearBuilds];
   
-  
-//  [[AppHub buildManager] fetchBuildWithCompletionHandler:nil];
-//  // Create a root view controller and present it...
-//  
-//  [AppHub presentSelectorOnViewController:vc
-//                         withBuildHandler:^(AHBuild *result, NSError *error) {
-//    NSURL *jsCodeLocation = [result.bundle URLForResource:@"main"
-//                                            withExtension:@"jsbundle"];
-//    // Now initialize an RCTRootView with this bundle.
-//  }];
-  
+  // Comment from here.
 //  [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
-//  [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.11/hello-world-images.zip"];
-//  dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+//  [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.17/hello-world-with-images.zip"];
 //  
 //  [[AppHub buildManager] fetchBuildWithCompletionHandler:^(AHBuild *result, NSError *error) {
-//    dispatch_semaphore_signal(sem);
+//    NSURL *jsCodeLocation = [manager.currentBuild.bundle URLForResource:@"main" withExtension:@"jsbundle"];
+//    
+//    RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+//                                                        moduleName:@"HelloWorld"
+//                                                 initialProperties:nil
+//                                                     launchOptions:launchOptions];
+//    
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    UIViewController *rootViewController = [[UIViewController alloc] init];
+//    rootViewController.view = rootView;
+//    self.window.rootViewController = rootViewController;
+//    [self.window makeKeyAndVisible];
 //  }];
-//  
-//  dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
-  
-//  [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
-//  [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.11/hello-world.zip"];
+  // Comment to here.
   
   NSURL *jsCodeLocation = [manager.currentBuild.bundle URLForResource:@"main" withExtension:@"jsbundle"];
-//  NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"HelloWorld"
@@ -68,7 +65,6 @@ RCT_EXPORT_METHOD(newBuildFound:(NSDictionary *)build) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  
 
   return YES;
 }
