@@ -118,28 +118,28 @@ captures/
 *.iml
 
 ## Directory-based project format:
-.idea/
+#.idea/
 # if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
-# .idea/shelf
+android/.idea/workspace.xml
+android/.idea/tasks.xml
+android/.idea/dictionaries
+android/.idea/shelf
 
 # Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
+android/.idea/dataSources.ids
+android/.idea/dataSources.xml
+android/.idea/sqlDataSources.xml
+android/.idea/dynamic.xml
+android/.idea/uiDesigner.xml
 
 # Gradle:
-# .idea/gradle.xml
-# .idea/libraries
+android/.idea/gradle.xml
+android/.idea/libraries
 
 # Mongo Explorer plugin:
-# .idea/mongoSettings.xml
+android/.idea/mongoSettings.xml
 
 ## File-based project format:
 *.ipr
