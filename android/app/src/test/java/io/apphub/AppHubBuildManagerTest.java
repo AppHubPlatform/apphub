@@ -190,7 +190,7 @@ public class AppHubBuildManagerTest extends AppHubBaseTest {
                 manager.cleanBuilds();
 
                 File f = new File(build.getBundleAssetPathWithName("index.android.bundle"));
-                assertTrue(f.exists() && f.isFile());
+                assertTrue(f.exists());
 
                 signal.countDown();
             }
@@ -334,32 +334,6 @@ public class AppHubBuildManagerTest extends AppHubBaseTest {
         manager.fetchBuild(null);
 
         assertFalse(signal.await(1, TimeUnit.SECONDS));
-    }
-
-    @Test
-    public void testNoBuildResponseClearsCurrentBuild() throws Exception {
-        final CountDownLatch signal = new CountDownLatch(1);
-
-        String responseStr = readFile("responses/valid_no_build_response.json");
-        stubFor(get(urlMatching(".*build.*"))
-                .willReturn(aResponse().withStatus(200).withBody(responseStr)));
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppHub.getContext());
-        prefs.edit().putString(manager.mSharedPreferencesLatestBuildJsonKey, "foo").apply();
-
-        manager.fetchBuild(new FetchBuildCallback() {
-            @Override
-            public void done(AppHubBuild build, AppHubException e) {
-                assertEquals("LOCAL_BUILD", build.getIdentifier());
-                assertEquals("LOCAL_BUILD", manager.getLatestBuild().getIdentifier());
-                assertEquals(build.getBundleAssetPathWithName("index.android.bundle"),
-                        "index.android.bundle");
-
-                signal.countDown();
-            }
-        });
-
-        assertTrue(signal.await(2, TimeUnit.SECONDS));
     }
 
     @Test

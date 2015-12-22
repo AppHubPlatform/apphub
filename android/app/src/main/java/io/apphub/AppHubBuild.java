@@ -59,7 +59,7 @@ public class AppHubBuild {
     }
 
     protected File getBuildDirectory() {
-        return new File(mBuildManager.getRootBuildDirectory(), "build/" + getIdentifier());
+        return new File(mBuildManager.getRootBuildDirectory(), getIdentifier());
     }
 
     protected AppHubBuild(AppHubBuildManager manager, JSONObject obj) throws JSONException {

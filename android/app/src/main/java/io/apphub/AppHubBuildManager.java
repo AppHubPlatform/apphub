@@ -58,7 +58,7 @@ public class AppHubBuildManager {
 
     protected File getRootBuildDirectory() {
         File rootDirectory = new File(AppHub.getContext().getFilesDir(), ROOT_DIR_NAME);
-        return new File(rootDirectory, "application/" + mApplication.getApplicationID());
+        return new File(rootDirectory, "application/" + mApplication.getApplicationID() + "/builds");
     }
 
     protected void cleanBuilds() {
@@ -76,8 +76,10 @@ public class AppHubBuildManager {
             buildDirectories = new File[0];
         }
 
+        System.out.println(latestBuild.getBuildDirectory().getAbsolutePath());
         for (File f : buildDirectories) {
-            if (! f.equals(getLatestBuild().getBuildDirectory())) {
+            System.out.println(f.getAbsolutePath());
+            if (! f.getAbsolutePath().equals(latestBuild.getBuildDirectory().getAbsolutePath())) {
                 AppHubUtils.deleteRecursively(f);
             }
         }

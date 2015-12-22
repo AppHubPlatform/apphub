@@ -37,6 +37,6 @@ public class AppHubBuildTest extends AppHubTest {
                 new HashSet<>(Arrays.asList(new String[]{"1.0"})));
         assertEquals(build.getCreationDate(), new Date(1436336352118L));
         assertEquals(build.getDescription(), "Working");
-        assertEquals(build.getS3Url(), "http://localhost:1111/amazon/abc");
+        assertEquals(build.getBuildUrl(), "http://localhost:1111/amazon/abc");
     }
 }
