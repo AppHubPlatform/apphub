@@ -75,23 +75,6 @@ static XCTestExpectation *_newBuildExpectation;
   XCTAssertTrue(foundElement, @"Couldn't find element with text in %d seconds", TIMEOUT_SECONDS);
 }
 
--(void) testNewBuildEvent {
-  _newBuildExpectation = [self expectationWithDescription:@"found a new build"];
-  
-  [[NSNotificationCenter defaultCenter] addObserverForName:@"NEW-BUILD" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-    NSDictionary *build = note.userInfo;
-    XCTAssertEqualObjects(build[@"buildIdentifier"], @"LOCAL");
-    [_newBuildExpectation fulfill];
-  }];
-  
-  AHBuild *currentBuild = [AppHub buildManager].currentBuild;
-  [[NSNotificationCenter defaultCenter] postNotificationName:AHBuildManagerDidMakeBuildAvailableNotification object:nil userInfo:@{AHBuildManagerBuildKey: currentBuild}];
-  
-  [self waitForExpectationsWithTimeout:5 handler:^(NSError *error) {
-    XCTAssertNil(error);
-  }];
-}
-
 -(void) testNewBuildJavaScript {
   [AppHubTestUtils stubGetBuildRouteWithJsonName:@"MockResponses/working-abc.json"];
   [AppHubTestUtils stubS3RouteWithIpaName:@"MockBuilds/React-0.17/hello-world-with-images.zip"];
