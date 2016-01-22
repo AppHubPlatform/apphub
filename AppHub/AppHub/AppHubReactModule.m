@@ -37,9 +37,12 @@ RCT_EXPORT_MODULE(AppHub)
 
 - (void)buildManagerDidMakeBuildAvailable:(NSNotification *)notification
 {
-    AHBuild *build = notification.userInfo[AHBuildManagerBuildKey];
-    [_bridge.eventDispatcher sendAppEventWithName:AHBuildManagerDidMakeBuildAvailableNotification
-                                             body:build.dictionaryValue];
+    if ([_bridge.modules objectForKey:@"RCTNativeAppEventEmitter"]) {
+        AHBuild *build = notification.userInfo[AHBuildManagerBuildKey];
+        
+        [_bridge.eventDispatcher sendAppEventWithName:AHBuildManagerDidMakeBuildAvailableNotification
+                                                 body:build.dictionaryValue];
+    }
 }
 
 - (void)dealloc

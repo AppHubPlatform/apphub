@@ -8,7 +8,7 @@
 #import "AHDefines.h"
 #import "AHConstants.h"
 
-NSString *const AHSDKVersion = @"0.3.6";
+NSString *const AHSDKVersion = @"0.3.7";
 
 NSString *const AHAssetBundleName = @"Assets.bundle";
 
