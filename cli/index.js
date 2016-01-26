@@ -35,7 +35,7 @@ var argv = require('yargs')
 
     var plistFile = argv.plistFile ||
       path.join('ios', require(path.join(process.cwd(), 'package.json')).name, 'Info.plist');
-    var outputZip = path.join(process.cwd(), argv.outputZip);
+    var outputZip = path.join(process.cwd().replace(/ /g, '\\ '), argv.outputZip);
     var tmpDir = path.join('/tmp', 'apphub', uuid.v4());
     var buildDir = path.join(tmpDir, BUILD_DIR_NAME);
     mkdirp.sync(buildDir);
