@@ -48,7 +48,6 @@
 		5504F9811B7DAB4E00D85C4D /* AHLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 5504F9801B7DAB4E00D85C4D /* AHLogging.m */; };
 		5504F9991B7DC39B00D85C4D /* Shims.m in Sources */ = {isa = PBXBuildFile; fileRef = 5504F9981B7DC39B00D85C4D /* Shims.m */; };
 		5504F9B51B7DC64200D85C4D /* AppHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 5504F9A51B7DC44000D85C4D /* AppHub.m */; };
-		552C6FE41B807ACB003846F8 /* AppHubReactModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 552C6FE31B807ACB003846F8 /* AppHubReactModule.m */; };
 		55357A031B800FD40033A332 /* libAppHubTestUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 553579FC1B800FBF0033A332 /* libAppHubTestUtils.a */; };
 		55357A041B800FE40033A332 /* AppHubTestBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 553579FE1B800FBF0033A332 /* AppHubTestBundle.bundle */; };
 		55357A051B80128B0033A332 /* AppHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 403CB8621B637F2B00521BDF /* AppHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -164,7 +163,6 @@
 		5504F9801B7DAB4E00D85C4D /* AHLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHLogging.m; sourceTree = "<group>"; };
 		5504F9981B7DC39B00D85C4D /* Shims.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shims.m; sourceTree = "<group>"; };
 		5504F9A51B7DC44000D85C4D /* AppHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHub.m; sourceTree = "<group>"; };
-		552C6FE31B807ACB003846F8 /* AppHubReactModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHubReactModule.m; sourceTree = "<group>"; };
 		553579F61B800FBF0033A332 /* AppHubTestUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppHubTestUtils.xcodeproj; path = ../../AppHubTestUtils/AppHubTestUtils.xcodeproj; sourceTree = "<group>"; };
 		55357A0E1B802B670033A332 /* MockBundles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MockBundles; sourceTree = "<group>"; };
 		555FF3AF1B37AC8D0064F175 /* libAppHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppHub.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,7 +264,6 @@
 				5588227B1B806AEF00FCC175 /* AppHub+Private.h */,
 				403CB8621B637F2B00521BDF /* AppHub.h */,
 				5504F9A51B7DC44000D85C4D /* AppHub.m */,
-				552C6FE31B807ACB003846F8 /* AppHubReactModule.m */,
 				40936D1B1B9148D400F59A18 /* AHReachability.h */,
 				40936D1C1B9148D400F59A18 /* AHReachability.m */,
 				404CB89B1C25062B00A87A88 /* UIImage+AppHub.m */,
@@ -481,7 +478,6 @@
 			files = (
 				40825FEB1B6343E500A8A506 /* mztools.c in Sources */,
 				40825FE71B6343E500A8A506 /* AHBuildsListViewController.m in Sources */,
-				552C6FE41B807ACB003846F8 /* AppHubReactModule.m in Sources */,
 				40825FED1B6343E500A8A506 /* unzip.c in Sources */,
 				40936D1E1B9148D400F59A18 /* AHReachability.m in Sources */,
 				403CB86B1B6381E000521BDF /* AHFileSystem.m in Sources */,
