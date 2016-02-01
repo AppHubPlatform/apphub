@@ -4,9 +4,7 @@ machine:
 
 dependencies:
   pre:
-    - brew install npm
     - brew uninstall xctool && brew install xctool
-    - cd AppHubIntegration && npm install
 
 test:
   override:
@@ -17,6 +15,6 @@ test:
       CODE_SIGNING_REQUIRED=NO
       -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
       -sdk iphonesimulator
-      -project AppHubIntegration/AppHubIntegration.xcodeproj
-      -scheme "AppHubIntegration"
+      -project AppHub/AppHub.xcodeproj
+      -scheme "AppHubTests"
       build build-tests run-tests
