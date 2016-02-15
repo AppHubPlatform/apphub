@@ -9,6 +9,8 @@
 
 #import "AHDefines.h"
 
+typedef void (^TaskHandlerBlock)(NSURLSessionDownloadTask *task);
+
 @class AHBuild;
 
 /**
@@ -94,5 +96,16 @@ extern NSString *const AHBuildManagerBuildKey;
  * be the most up-to-date build of your application.
  */
 - (void)fetchBuildWithCompletionHandler:(AHBuildResultBlock)completionHandler;
+
+/**
+ * Hook called after NSURLSessionDownloadTask has created
+ *
+ * Useful for a handling download progress on the slow connection:
+ *
+ * [[AppHub buildManager] setTaskHandlerBlock:^(NSURLSessionDownloadTask *task){
+ *   [progressView setProgressWithDownloadProgressOfTask:task animated:YES];
+ * }];
+ */
+@property (nonatomic, copy) TaskHandlerBlock taskHandlerBlock;
 
 @end
