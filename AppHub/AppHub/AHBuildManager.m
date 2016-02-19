@@ -173,6 +173,9 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
             completion(nil, AHError(@"Build does not contain bundle at path: %@", bundleDirectory.path));
         }
     }];
+    if (self.taskHandlerBlock) {
+        self.taskHandlerBlock(task);
+    }
     [task resume];
 }
 
