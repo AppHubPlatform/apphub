@@ -49,7 +49,7 @@ var argv = require('yargs')
     ];
 
     var cmds = [
-      'react-native bundle ' + options.join(' '),
+      'node node_modules/react-native/local-cli/cli.js bundle ' + options.join(' '),
       'cp ' + plistFile + ' ' + buildDir,
       'cd ' + tmpDir + ' && zip -r ' + outputZip + ' ' + BUILD_DIR_NAME,
     ];
