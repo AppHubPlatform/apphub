@@ -33,8 +33,7 @@ See the [AppHub docs](http://docs.apphub.io/v1.0/docs/self-hosting) for full doc
 
 ## Developer Resources
 
-Building a React Native app with AppHub?
-
+- [AppHub Deploy](https://github.com/joshuapinter/apphubdeploy): a CLI by [Joshua Pinter](https://twitter.com/joshuapinter) that makes it easy to build and deploy to AppHub.
 - iOS Documentation: iOS API documentation is available at [https://apphub.io/api/ios/](https://apphub.io/api/ios/)
 - Documentation: AppHub documentation is available at [http://docs.apphub.io](http://docs.apphub.io)
 - Example project: check out [this example project](https://github.com/AppHubPlatform/AppHubStarterProject) which alets users when new a new version of your app becomes available.
