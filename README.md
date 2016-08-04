@@ -6,7 +6,7 @@ apphub-ios is an iOS client for [AppHub](https://apphub.io).
 
 AppHub lets you instantly update React Native apps without resubmitting to the App Store.
 
-Special thanks to [Alex Akers](https://github.com/a2) and [Ben Edelstein](https://github.com/benthehenten) for their contributions to the library!
+Special thanks to [BrowserStack](https://www.browserstack.com) by providing generous testing support and resources.
 
 #### Features
 
