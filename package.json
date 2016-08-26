@@ -1,6 +1,6 @@
 {
   "name": "apphub",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "React Native module for integrating with AppHub",
   "main": "index.js",
   "bin": {
