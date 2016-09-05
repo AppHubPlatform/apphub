@@ -41,5 +41,5 @@ Pod::Spec.new do |s|
   ]
   s.libraries = 'z'
   s.frameworks = 'SystemConfiguration'
-  s.dependency 'React'
+  s.dependency 'React/Core'
 end
