@@ -36,7 +36,7 @@ See the [AppHub docs](http://docs.apphub.io/v1.0/docs/self-hosting) for full doc
 - [AppHub Deploy](https://github.com/joshuapinter/apphubdeploy): a CLI by [Joshua Pinter](https://twitter.com/joshuapinter) that makes it easy to build and deploy to AppHub.
 - iOS Documentation: iOS API documentation is available at [https://apphub.io/api/ios/](https://apphub.io/api/ios/)
 - Documentation: AppHub documentation is available at [http://docs.apphub.io](http://docs.apphub.io)
-- Example project: check out [this example project](https://github.com/AppHubPlatform/AppHubStarterProject) which alets users when new a new version of your app becomes available.
+- Example project: check out [this example project](https://github.com/AppHubPlatform/AppHubStarterProject) which alerts users when new a new version of your app becomes available.
 - Announcement list: sign up at [https://apphub.io](https://apphub.io)
 
 Interested in contributing to AppHub?
