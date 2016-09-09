@@ -67,7 +67,7 @@ The resulting block will be invoked on the main thread, so you can present a vie
  
 Example:
  
-    [[AppHub buildManager] presentSelectorWithBuildHandler:^(AHBuild *build, NSError *error) {
+    [AppHub presentSelectorOnViewController:self withBuildHandler:^(AHBuild *build, NSError *error) {
         if (error || ! build) {
             // An error occurred.
         } else {
