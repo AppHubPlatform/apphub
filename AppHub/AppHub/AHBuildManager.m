@@ -56,6 +56,8 @@ NSString *const AHBuildManagerBuildKey = @"AHNewBuildKey";
 
 - (NSString *)installedAppVersion
 {
+    if (_installedAppVersion) { return _installedAppVersion; }
+
     NSBundle *mainBundle = [NSBundle mainBundle];
     return mainBundle.infoDictionary[@"CFBundleShortVersionString"];
 }
