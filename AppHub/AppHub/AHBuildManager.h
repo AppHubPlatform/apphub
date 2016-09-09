@@ -82,6 +82,16 @@ extern NSString *const AHBuildManagerBuildKey;
  */
 @property (nonatomic, assign, getter=areCellularDownloadsEnabled) BOOL cellularDownloadsEnabled;
 
+
+/**
+ * By default, the AppHub SDK will use the version of your application to ensure that AppHub builds match
+ * your application. If the version of your AppHub build is different to your application's then
+ * you can use this setting to have AppHub look for a specific version.
+ *
+ * Defaults to `NSBundle mainBundle`'s CFBundleShortVersionString.
+ */
+@property (nonatomic, copy, readwrite) NSString *installedAppVersion;
+
 ///---------------------
 /// @name Fetching Builds Manually (Advanced)
 ///---------------------
