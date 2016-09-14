@@ -17,16 +17,16 @@
 
 @implementation AHBuildsListViewController
 {
-    NSArray *_builds;
+    NSArray *_buildSections;
     NSDateFormatter *_dateFormatter;
     AHBuildResultBlock _resultsHandler;
 }
 
 - (instancetype)initWithBuildsResultsHandler:(AHBuildResultBlock)block
 {
-    if ((self = [super initWithStyle:UITableViewStylePlain])) {
+    if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
         _resultsHandler = block;
-        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+        _buildSections = @[];
     }
 
     return self;
@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     [self fetchBuilds];
 }
 
@@ -53,16 +54,35 @@
             }
             
             NSDictionary *listBuildsJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            _builds = [listBuildsJson[@"data"] arrayByAddingObject:@{
-                 AHBuildDataNameKey: @"Local Build",
-                 AHBuildDataDescriptionKey: @"This build is loaded locally from the device."
-             }];
+            _buildSections = [self createBuildList: listBuildsJson[@"data"]];
             
             [self.tableView reloadData];
         });
     }];
     [task resume];
+}
+
+- (NSArray *)createBuildList:(NSArray *)builds
+{
+    NSMutableArray *sections = [NSMutableArray array];
+
+    NSSortDescriptor *createdSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:NO];
+    NSArray *sortedBuilds = [builds sortedArrayUsingDescriptors:@[createdSortDescriptor]];
+    [sections addObject:sortedBuilds];
+
+    [sections addObject:@[
+    @{
+        AHBuildDataNameKey: @"Local Build",
+        AHBuildDataDescriptionKey: @"This build is loaded locally from the device."
+    }
+    ]];
+    return [sections copy];
+}
+
+
+- (NSDictionary *)buildAtIndexPath:(NSIndexPath *)path
+{
+    return _buildSections[path.section][path.row];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,7 +93,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:BuildCellIdentifier];
     }
     
-    NSDictionary *item = _builds[indexPath.row];
+    NSDictionary *item = [self buildAtIndexPath:indexPath];
     NSString *createdTime = item[AHBuildDataCreatedAtKey];
     NSDate *createdDate = createdTime ? [NSDate dateWithTimeIntervalSince1970:createdTime.doubleValue / 1000.0] : [NSDate date];
 
@@ -85,28 +105,39 @@
     NSString *createdString = [_dateFormatter stringFromDate:createdDate];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", item[AHBuildDataNameKey], createdString];
-    cell.detailTextLabel.text = item[AHBuildDataDescriptionKey];
+    NSString *subtitle = [[item[AHBuildDataCompatibleIOSVersionsKey] allValues] componentsJoinedByString:@", "];
+    cell.detailTextLabel.text = subtitle ?: item[AHBuildDataDescriptionKey];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row + 1 == _builds.count) {
+    if (indexPath.section + 1 == _buildSections.count) {
         // Return the default build.
         AHBuild *defaultBuild = [[AHBuild alloc] initWithBundle:[NSBundle mainBundle] info:nil];
         _resultsHandler(defaultBuild, nil);
         return;
     }
     
-    NSDictionary *buildJSON = _builds[indexPath.row];
+    NSDictionary *buildJSON = [self buildAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [[AppHub buildManager] downloadFromJSON:buildJSON resultsHandler:_resultsHandler];
 }
 
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return (section + 1 == _buildSections.count) ? @"Local Build" : @"AppHub Builds";
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+{
+    return [_buildSections count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_builds count];
+    return [_buildSections[section] count];
 }
 
 @end
