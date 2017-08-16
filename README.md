@@ -46,3 +46,8 @@ Interested in contributing to AppHub?
 
 We are hiring! Visit [https://apphub.io/jobs](https://apphub.io/jobs) to learn more about working on the AppHub project.
 
+## Supporters
+
+Thank you to [BrowserStack](https://browserstack.com) for CI services.
+
+<img src="https://www.browserstack.com/images/layout/browserstack-logo-600x315.png"></img>
